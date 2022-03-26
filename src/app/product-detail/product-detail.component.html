@@ -1,0 +1,472 @@
+<main class="main">
+  <nav aria-label="breadcrumb" class="breadcrumb-nav border-0 mb-0">
+    <div class="container-fluid d-flex align-items-center">
+      <ol class="breadcrumb">
+        <li class="breadcrumb-item"><a href="">Home</a></li>
+        <li class="breadcrumb-item"><a href="shop/product-list">Produits</a></li>
+        <li class="breadcrumb-item active" aria-current="page">{{productDetail.name}}</li>
+      </ol>
+    </div><!-- End .container-fluid -->
+  </nav><!-- End .breadcrumb-nav -->
+
+  <div class="page-content">
+    <div class="container-fluid">
+      <div class="row">
+        <div class="col-xl-10">
+          <div class="product-details-top">
+            <div class="row">
+              <div class="col-md-5 col-lg-6">
+                <div class="product-gallery">
+                  <figure class="product-main-image">
+                    <span *ngIf="productDetail.new_product" class="product-label label-new">Nouveauté</span>
+                    <span *ngIf="productDetail.populary" class="product-label label-new">Populaire</span>
+                    <img id="product-zoom" [src]="'/assets/images/mimipedro/' + mainImage" alt="product image">
+                  </figure><!-- End .product-main-image -->
+
+                  <div id="product-zoom-gallery" class="product-image-gallery max-col-6">
+                    <a *ngIf="productDetail.image" class="product-gallery-item" style="cursor:pointer;" (click)="mainImage = productDetail.image">
+                      <img [src]="'/assets/images/mimipedro/' + productDetail.image" alt="product side">
+                    </a>
+
+                    <a *ngIf="productDetail.image2"  class="product-gallery-item" style="cursor:pointer;" (click)="mainImage = productDetail.image2">
+                      <img [src]="'/assets/images/mimipedro/' + productDetail.image2" alt="product with model">
+                    </a>
+
+                    <a *ngIf="productDetail.image3" class="product-gallery-item" style="cursor:pointer;" (click)="mainImage = productDetail.image3">
+                      <img [src]="'/assets/images/mimipedro/' + productDetail.image3" alt="product with model">
+                    </a>
+
+                    <a *ngIf="productDetail.image4" class="product-gallery-item" style="cursor:pointer;" (click)="mainImage = productDetail.image4">
+                      <img [src]="'/assets/images/mimipedro/' + productDetail.image4" alt="product back">
+                    </a>
+
+                    <a *ngIf="productDetail.image5" class="product-gallery-item" style="cursor:pointer;" (click)="mainImage = productDetail.image5">
+                      <img [src]="'/assets/images/mimipedro/' + productDetail.image5" alt="product back">
+                    </a>
+
+                  </div><!-- End .product-image-gallery -->
+                </div><!-- End .product-gallery -->
+              </div><!-- End .col-lg-7 -->
+
+              <div class="col-md-6 col-lg-5">
+                <div class="product-details">
+                  <h1 class="product-title">{{productDetail.name}}</h1><!-- End .product-title -->
+
+                  <div class="product-price">
+                    <span class="new-price">{{productDetail.price}} Fcfa</span>
+                  </div><!-- End .product-price -->
+
+                  <br>
+
+                  <div class="product-content my-product-attribut">
+                    <p>{{productDetail.description}}</p>
+                  </div><!-- End .product-content -->
+
+                  <br>
+
+                  <div class="my-product-attribut">
+                    <label>Couleurs Disponibles : </label>  <strong> {{productDetail.colors_availaibles}}</strong>
+                  </div><!-- End .details-filter-row -->
+
+                  <div class="my-product-attribut">
+                    <label>Tailles Disponibles : </label>  <strong> {{productDetail.sizes_availaibles}}</strong>
+                  </div><!-- End .details-filter-row -->
+
+                  <div class="my-product-attribut">
+                    <label>Quantité en Stock : </label>  <strong> {{productDetail.quantity}}</strong>
+                  </div><!-- End .details-filter-row -->
+
+
+                  <div class="product-details-action">
+                    <a href="#command-modal" data-toggle="modal" (click)="onCommandModalOpen()" class="btn-product btn-cart"><span>Commander</span></a>
+                    <a *ngIf="isAuthenticated" class="btn btn-success ml-2" href="#product-modal"  data-toggle="modal"> Modifier le Produit </a>
+                  </div><!-- End .product-details-action -->
+
+                  <div class="product-details-footer">
+                    <div class="product-cat my-product-attribut">
+                      <span>Categorie : </span>
+                      <strong>{{productDetail.category_name}}</strong>
+                    </div><!-- End .product-cat -->
+                  </div><!-- End .product-details-footer -->
+                  <div class="social-icons social-icons-sm">
+                    <span class="social-label">Partager:</span>
+                    <a class="social-icon" title="Facebook" target="_blank"><i class="icon-facebook-f"></i></a>
+                    <a class="social-icon" title="Twitter" target="_blank"><i class="icon-twitter"></i></a>
+                    <a class="social-icon" title="Instagram" target="_blank"><i class="icon-instagram"></i></a>
+                    <a class="social-icon" title="Whatsapp" target="_blank"><i class="icon-whatsapp"></i></a>
+                  </div>
+
+                </div><!-- End .product-details -->
+              </div><!-- End .col-lg-5 -->
+            </div><!-- End .row -->
+          </div><!-- End .product-details-top -->
+        </div><!-- End .col-xl-10 -->
+
+        <aside class="col-xl-2 d-md-none d-xl-block">
+          <div class="sidebar sidebar-product">
+            <div class="widget widget-products">
+              <h4 class="widget-title">Produits Similaires</h4><!-- End .widget-title -->
+
+              <div class="products">
+                <div *ngFor="let relatedProduct of relatedProuctList">
+                  <div *ngIf="relatedProduct.id != productDetail.id" class="product product-sm">
+                    <figure class="product-media">
+                      <a style="cursor:pointer;" (click)="showRelatedOneProduct(relatedProduct)">
+                        <img [src]="'/assets/images/mimipedro/' + relatedProduct.image" alt="Product image" class="product-image">
+                      </a>
+                    </figure>
+
+                    <div class="product-body">
+                      <h5 class="product-title"><a style="cursor:pointer;"
+                       (click)="showRelatedOneProduct(relatedProduct)"> <strong>{{relatedProduct.name}}</strong>
+                        <br> {{relatedProduct.description}}</a></h5><!-- End .product-title -->
+                      <div class="product-price">
+                        <span class="new-price">{{relatedProduct.price}} Fcfa</span>
+                      </div><!-- End .product-price -->
+                    </div><!-- End .product-body -->
+                  </div>
+                </div><!-- End .product product-sm -->
+              </div><!-- End .products -->
+
+              <a href="shop/product-list" class="btn btn-outline-dark-3"><span>Voir Plus</span><i class="icon-long-arrow-right"></i></a>
+            </div><!-- End .widget widget-products -->
+
+            <div class="widget widget-banner-sidebar">
+              <div class="banner-sidebar-title">{{promoProduct1.name}}</div><!-- End .ad-title -->
+
+              <div class="banner-sidebar banner-overlay">
+                <a style="cursor:pointer;" (click)="showPromoProduct()">
+                  <img [src]="'/assets/images/mimipedro/' + promoProduct1.image" alt="banner">
+                </a>
+              </div><!-- End .banner-ad -->
+              <div class="text-center">
+                {{promoProduct1.price}} Fcfa
+              </div>
+            </div><!-- End .widget -->
+          </div><!-- End .sidebar sidebar-product -->
+        </aside><!-- End .col-xl-2 -->
+
+      </div><!-- End .row -->
+
+    </div><!-- End .container-fluid -->
+  </div><!-- End .page-content -->
+</main><!-- End .main -->
+
+<!-- Command Modal -->
+<div class="modal fade" id="command-modal" tabindex="-1" role="dialog" aria-hidden="true">
+  <div class="modal-dialog modal-dialog-centered" role="document">
+    <div class="modal-content">
+      <div class="modal-header text-center">
+        <h4 class="modal-title">Passer une Commande</h4>
+        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+          <span aria-hidden="true"><i class="icon-close"></i></span>
+        </button>
+      </div>
+      <div class="modal-body">
+        <div class="form-box">
+          <div class="container-fluid">
+            <form *ngIf="!closeModal" style="margin-left: -10%; margin-right: -10%" (submit)="SaveCommand()">
+              <div *ngIf="mode == 'saisie'" >
+                <div class="form-row">
+                    <div class="col form-group">
+                      <label >Nom :</label>
+                      <input type="text" name="name" class="form-control" [(ngModel)]="newCommand.client_name">
+                    </div>
+                    <div class="col ml-auto form-group">
+                      <label >Prenom :</label>
+                      <input type="text" name="prenom" class="form-control" [(ngModel)]="newCommand.client_prenom">
+                  </div>
+                </div>
+
+                <div class="form-group">
+                  <label >Adresse : </label>
+                  <input type="text" class="form-control" name="adresse" [(ngModel)]="newCommand.client_adresse">
+                </div>
+                <div class="form-group">
+                  <label >Email : </label>
+                  <input type="text" class="form-control" name="email" [(ngModel)]="newCommand.client_email">
+                </div>
+                <div class="form-group">
+                  <label >Numero de Telephone : </label>
+                  <input type="text" class="form-control" name="tel" [(ngModel)]="newCommand.client_tel">
+                </div>
+                <div class="form-row">
+                    <div class="col form-group">
+                      <label>Couleur Souhaitée :</label>
+                      <input type="text" name="color" class="form-control" [(ngModel)]="newCommand.color_choiced">
+                    </div>
+                      <div class="col ml-auto form-group">
+                        <label>Taille Souhaitée :</label>
+                        <input type="text" name="size" class="form-control" [(ngModel)]="newCommand.size_choiced">
+                      </div>
+                </div>
+                <div class="form-group">
+                  <label >Quantité choisie : </label>
+                  <input type="number" class="form-control" name="qty" [(ngModel)]="newCommand.quantity_choiced" (change)="newCommand.total_price = newCommand.product_price * newCommand.quantity_choiced">
+                </div>
+                <div class="form-row">
+                  <div class="col form-group">
+                    <label>Prix Unitaire :</label>
+                    <input type="text" [value]="newCommand.product_price + ' Fcfa' " class="form-control" readonly>
+                  </div>
+                  <div class="col ml-auto form-group">
+                    <label>Prix Total :</label>
+                    <input type="text" [value]="newCommand.total_price + ' Fcfa' " class="form-control" readonly>
+                  </div>
+                </div>
+                <div class="form-group">
+                  <label>Remarque : </label>
+                  <textarea type="text" name="remarque" class="form-control" [(ngModel)]="newCommand.particularity"> </textarea>
+                </div>
+
+                <button type="button" data-dismiss="modal" aria-label="Close" class="btn btn-info" > Fermer </button>
+                <button type="button" class="btn btn-success ml-3" (click)="testCommandBeforeChangeMode()" > Suivant </button>
+              </div> <!-- Fin mode = SAISIE -->
+             <!---------------------- MODE DETAIL ----------------------------------->
+              <div *ngIf="mode == 'detail'" >
+                <div class="form-row">
+                  <div class="col form-group">
+                    <label >Nom : </label>
+                    <strong> {{newCommand.client_name}}</strong>
+                  </div>
+                  <div class="col ml-auto form-group">
+                    <label >Prenom :</label>
+                    <strong> {{newCommand.client_prenom}}</strong>
+                  </div>
+                </div>
+
+                <div class="form-group">
+                  <label >Adresse : </label>
+                  <strong> {{newCommand.client_adresse}}</strong>
+                </div>
+                <div class="form-group">
+                  <label >Email : </label>
+                  <strong> {{newCommand.client_email}}</strong>
+                </div>
+                <div class="form-group">
+                  <label >Numero de Telephone : </label>
+                  <strong> {{newCommand.client_tel}}</strong>
+                </div>
+                <div class="form-row">
+                  <div class="col form-group">
+                    <label>Couleur Souhaitée :</label>
+                    <strong> {{newCommand.color_choiced}}</strong>
+                  </div>
+                  <div class="col ml-auto form-group">
+                    <label>Taille Souhaitée :</label>
+                    <strong> {{newCommand.size_choiced}}</strong>
+                  </div>
+                </div>
+                <div class="form-group">
+                  <label >Quantité choisie : </label>
+                  <strong> {{newCommand.quantity_choiced}}</strong>
+                </div>
+                <div class="form-row">
+                  <div class="col form-group">
+                    <label>Prix Unitaire :</label>
+                    <strong> {{newCommand.product_price}} Fcfa</strong>
+                  </div>
+                  <div class="col ml-auto form-group">
+                    <label>Prix Total :</label>
+                    <strong> {{newCommand.total_price}} Fcfa</strong>
+                  </div>
+                </div>
+                <div class="form-group">
+                  <label>Remarque : </label>
+                  <strong> {{newCommand.particularity}}</strong>
+                </div>
+
+                <button type="button" (click)="mode = 'saisie'" class="btn btn-info" > Précédant </button>
+                <button type="submit" class="btn btn-success ml-3" > Valider </button>
+              </div> <!-- Fin mode = SAISIE -->
+            </form>
+            <div *ngIf="closeModal" class="modal-footer">
+              <button (click)="onCloseModal()" type="button" data-dismiss="modal" aria-label="Close" class="btn btn-info" > Fermer </button>
+            </div>
+          </div>
+
+          <!--<form>
+            <div class="form-group">
+              <input type="file" (change)="onImageUpload($event)">
+              <input type="button" (click)="imageUploadAction()" value="Upload Image" class="btn1">
+            </div>
+
+
+            <div>
+              <output *ngIf=successResponse class="success"><b>{{successResponse}}</b></output>
+            </div>
+            <br>
+
+            <div class="form-group">
+              <input type="text" id="image" placeholder="Search Image" [(ngModel)]="image" name="image" />
+              <input type="button" (click)="viewImage()" value="View Image" class="btn1">
+
+            </div>
+
+            <div *ngIf=dbImage>
+              <img [src]="dbImage">
+            </div>
+
+          </form>-->
+
+        </div><!-- End .form-box -->
+
+      </div><!-- End .modal-body -->
+    </div><!-- End .modal-content -->
+  </div><!-- End .modal-dialog -->
+</div><!-- End .modal -->
+
+<!-- Product Modal -->
+<div class="modal fade" id="product-modal" tabindex="-1" role="dialog" aria-hidden="true">
+  <div class="modal-dialog modal-dialog-centered" role="document">
+    <div class="modal-content">
+      <div class="modal-header text-center">
+        <h4 class="modal-title">Ajouter/Modifier un produit</h4>
+        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+          <span aria-hidden="true"><i class="icon-close"></i></span>
+        </button>
+      </div>
+      <div class="modal-body">
+        <div class="form-box">
+          <div class="container-fluid">
+            <form *ngIf="!closeModal" style="margin-left: -10%; margin-right: -10%" (submit)="testAndSaveProduct()">
+              <div *ngIf="productFormMode == 'detail'" >
+                <div class="form-row col-md-12">
+                  <div class="col">
+                    <label>Image du Produit :</label>
+                    <img *ngIf=productDetailImage1 [src]="productDetailImage1" class="mb-1">
+                    <div class="custom-file">
+                      <input type="file" name="image" class="custom-file-input" (change)="onProductImage2345Upload($event, 1)" >
+                      <label class="custom-file-label">Choose file</label>
+                    </div>
+                  </div>
+                  <div class="col ml-auto">
+                    <div class="form-group">
+                      <label >Nom du Produit :</label>
+                      <input type="text" name="name" class="form-control" [(ngModel)]="productDetail.name">
+                    </div>
+                    <div class="form-group">
+                      <label>Description:</label>
+                      <textarea type="text" name="description" class="form-control" [(ngModel)]="productDetail.description"> </textarea>
+                    </div>
+                  </div>
+                </div>
+
+                <div class="form-row">
+                  <div class="form-group col-md-6">
+                    <label>Prix (En Fcfa) :</label>
+                    <input type="number" name="price" class="form-control" [(ngModel)]="productDetail.price">
+                  </div>
+                  <div class="form-group col-md-6">
+                    <label>Quantité :</label>
+                    <input type="number" name="quantity" class="form-control" [(ngModel)]="productDetail.quantity">
+                  </div>
+                </div>
+                <div class="form-group">
+                  <label >Categorie :</label>
+                  <select class="form-control custom-select" name="categoryName" [(ngModel)]="productDetail.category_name">
+                    <option *ngFor = "let category of allCategories" [value]="category.name" >{{category.name}}</option>
+                  </select>
+                </div>
+                <div class="form-group">
+                  <label >Couleurs disponibles</label>
+                  <input type="text" class="form-control" placeholder="Noir ,Blanc, Rouge..." name="colors" [(ngModel)]="productDetail.colors_availaibles">
+                </div>
+                <div class="form-group">
+                  <label >Tailles disponibles</label>
+                  <input type="text" class="form-control" placeholder="XS ,X, XL..." name="size" [(ngModel)]="productDetail.sizes_availaibles">
+                </div>
+                <div class="form-row ml-1 mb-2">
+                  <div class="col custom-control custom-checkbox">
+                    <input type="checkbox" class="custom-control-input" id="customCheck1" name="isNew" [(ngModel)]="productDetail.new_product">
+                    <label class="custom-control-label" for="customCheck1" style="margin-left: 1px">Nouveauté</label>
+                  </div>
+                  <div class="col custom-control custom-checkbox">
+                    <input type="checkbox" class="custom-control-input" id="customCheck2" name="isPopular" [(ngModel)]="productDetail.populary">
+                    <label class="custom-control-label" for="customCheck2" style="margin-left: 1px">Populaire</label>
+                  </div>
+                </div>
+                <button type="button" data-dismiss="modal" aria-label="Close" class="btn btn-info" > Fermer </button>
+                <button *ngIf="productDetail.id" (click)="DeleteProduct(productDetail)" type="button" class="btn btn-danger ml-3"> Supprimer</button>
+                <button type="button" class="btn btn-success ml-3" (click)="productFormMode = 'image'" > Suivant </button>
+              </div> <!-- Fin ProductFormMode = detail -->
+              <div *ngIf="productFormMode == 'image'" >
+
+                <div class="form-row col-md-12 mb-2">
+                  <div class="col">
+                    <label>Image 2 du Produit :</label>
+                    <img *ngIf=productDetailImage2 [src]="productDetailImage2" class="mb-1">
+                    <div class="custom-file">
+                      <input type="file" name="image2" class="custom-file-input" (change)="onProductImage2345Upload($event,2)" >
+                      <label class="custom-file-label">Choose file</label>
+                    </div>
+                  </div>
+                  <div class="col">
+                    <label>Image 3 du Produit :</label>
+                    <img *ngIf=productDetailImage3 [src]="productDetailImage3" class="mb-1">
+                    <div class="custom-file">
+                      <input type="file" name="image3" class="custom-file-input" (change)="onProductImage2345Upload($event,3)" >
+                      <label class="custom-file-label">Choose file</label>
+                    </div>
+                  </div>
+                </div>
+
+                <div class="form-row col-md-12 mb-2">
+                  <div class="col">
+                    <label>Image 4 du Produit :</label>
+                    <img *ngIf=productDetailImage4 [src]="productDetailImage4" class="mb-1">
+                    <div class="custom-file">
+                      <input type="file" name="image4" class="custom-file-input" (change)="onProductImage2345Upload($event,4)" >
+                      <label class="custom-file-label">Choose file</label>
+                    </div>
+                  </div>
+                  <div class="col">
+                    <label>Image 5 du Produit :</label>
+                    <img *ngIf=productDetailImage5 [src]="productDetailImage5" class="mb-1">
+                    <div class="custom-file">
+                      <input type="file" name="image5" class="custom-file-input" (change)="onProductImage2345Upload($event,5)" >
+                      <label class="custom-file-label">Choose file</label>
+                    </div>
+                  </div>
+                </div>
+
+                <button type="button" (click)="productFormMode = 'detail'"class="btn btn-info" > Précédant </button>
+                <button type="submit" class="btn btn-success ml-3" > Valider </button>
+              </div>
+            </form>
+            <div *ngIf="closeModal" class="modal-footer">
+              <button (click)="onCloseModal()" type="button" data-dismiss="modal" aria-label="Close" class="btn btn-info" > Fermer </button>
+            </div>
+          </div>
+          <!--<form>
+            <div class="form-group">
+              <input type="file" (change)="onImageUpload($event)">
+              <input type="button" (click)="imageUploadAction()" value="Upload Image" class="btn1">
+            </div>
+
+
+            <div>
+              <output *ngIf=successResponse class="success"><b>{{successResponse}}</b></output>
+            </div>
+            <br>
+
+            <div class="form-group">
+              <input type="text" id="image" placeholder="Search Image" [(ngModel)]="image" name="image" />
+              <input type="button" (click)="viewImage()" value="View Image" class="btn1">
+
+            </div>
+
+            <div *ngIf=dbImage>
+              <img [src]="dbImage">
+            </div>
+
+          </form>-->
+
+        </div><!-- End .form-box -->
+
+      </div><!-- End .modal-body -->
+    </div><!-- End .modal-content -->
+  </div><!-- End .modal-dialog -->
+</div><!-- End .modal -->
+
+

@@ -1,0 +1,235 @@
+<main class="main">
+  <nav aria-label="breadcrumb" class="breadcrumb-nav border-0 mb-0">
+    <div class="container">
+      <ol class="breadcrumb">
+        <li class="breadcrumb-item"><a href="index.html">Home</a></li>
+        <li class="breadcrumb-item"><a href="#">Pages</a></li>
+        <li class="breadcrumb-item active" aria-current="page">Contactez-Nous</li>
+      </ol>
+    </div><!-- End .container -->
+  </nav><!-- End .breadcrumb-nav -->
+  <div class="container">
+    <a *ngIf="isAuthenticated" href="#image-modal" data-toggle="modal" (click)="onChangeImage('contact-banner')" class="page-header page-header-big text-center" [style]="'background-image: url(assets/images/mimipedro/'+banner.image+')'">
+      <h1 class="page-title text-white">{{banner.title}}<span class="text-white">{{banner.description}}</span></h1>
+    </a><!-- End .page-header -->
+    <a *ngIf="!isAuthenticated" class="page-header page-header-big text-center" [style]="'background-image: url(assets/images/mimipedro/'+banner.image+')'">
+      <h1 class="page-title text-white">{{banner.title}}<span class="text-white">{{banner.description}}</span></h1>
+    </a><!-- End .page-header -->
+  </div><!-- End .container -->
+
+  <div class="page-content pb-0">
+    <div class="container">
+      <div class="row">
+        <div class="col-lg-6 mb-2 mb-lg-0">
+          <h2 class="title mb-1">Information de Contact</h2><!-- End .title mb-2 -->
+          <p class="mb-3">MimiPedro se tient à Votre Service de 8h à 18h du Lundi au Vendredi <br>
+            Ainsi que le Samedi de 10h à 16h.</p>
+          <div class="row">
+            <div class="col-sm-7">
+              <div class="contact-info">
+                <h3>L'Atelier</h3>
+
+                <ul class="contact-list">
+                  <li>
+                    <i class="icon-map-marker"></i>
+                    Badalabougou Rue 36 - Porte 62
+                  </li>
+                  <li>
+                    <i class="icon-phone"></i>
+                    <a href="tel:+223 76 49 82 56">+223 76 49 82 56</a>
+                  </li>
+                  <li>
+                    <i class="icon-phone"></i>
+                    <a href="tel:+223 20 80 18 52">Fixe : +223 20 80 18 52</a>
+                  </li>
+                  <li>
+                    <i class="icon-envelope"></i>
+                    <a href="mailto:#">mimipedro46@yahoo.fr</a>
+                  </li>
+                </ul><!-- End .contact-list -->
+              </div><!-- End .contact-info -->
+            </div><!-- End .col-sm-7 -->
+
+            <div class="col-sm-5">
+              <div class="contact-info">
+                <h3>L'Atelier</h3>
+
+                <ul class="contact-list">
+                  <li>
+                    <i class="icon-clock-o"></i>
+                    <span class="text-dark">Lundi-Vendredi</span> <br>8h-18h
+                  </li>
+                  <li>
+                    <i class="icon-calendar"></i>
+                    <span class="text-dark">Samedi</span> <br>10h-16h
+                  </li>
+                </ul><!-- End .contact-list -->
+              </div><!-- End .contact-info -->
+            </div><!-- End .col-sm-5 -->
+          </div><!-- End .row -->
+        </div><!-- End .col-lg-6 -->
+        <div class="col-lg-6">
+          <h2 class="title mb-1">Vous avez des Questions ?</h2><!-- End .title mb-2 -->
+          <p class="mb-2">Faites nous part et nous vous repondrons dans les plus brefs delais !</p>
+
+          <form action="#" class="contact-form mb-3">
+            <div class="row">
+              <div class="col-sm-6">
+                <label for="cname" class="sr-only">Nom</label>
+                <input type="text" class="form-control" id="cname" placeholder="Nom *" required>
+              </div><!-- End .col-sm-6 -->
+
+              <div class="col-sm-6">
+                <label for="cemail" class="sr-only">Email</label>
+                <input type="email" class="form-control" id="cemail" placeholder="Email *" required>
+              </div><!-- End .col-sm-6 -->
+            </div><!-- End .row -->
+
+            <div class="row">
+              <div class="col-sm-6">
+                <label for="cphone" class="sr-only">Phone</label>
+                <input type="tel" class="form-control" id="cphone" placeholder="Phone">
+              </div><!-- End .col-sm-6 -->
+
+              <div class="col-sm-6">
+                <label for="csubject" class="sr-only">Sujet</label>
+                <input type="text" class="form-control" id="csubject" placeholder="Sujet">
+              </div><!-- End .col-sm-6 -->
+            </div><!-- End .row -->
+
+            <label for="cmessage" class="sr-only">Message</label>
+            <textarea class="form-control" cols="30" rows="4" id="cmessage" required placeholder="Message *"></textarea>
+
+            <button type="submit" class="btn btn-outline-primary-2 btn-minwidth-sm">
+              <span>ENVOYER</span>
+              <i class="icon-long-arrow-right"></i>
+            </button>
+          </form><!-- End .contact-form -->
+        </div><!-- End .col-lg-6 -->
+      </div><!-- End .row -->
+      <!--<div class="stores mb-4 mb-lg-5">
+        <h2 class="title text-center mb-3">Our Stores</h2>&lt;!&ndash; End .title text-center mb-2 &ndash;&gt;
+
+        <div class="row">
+          <div class="col-lg-6">
+            <div class="store">
+              <div class="row">
+                <div class="col-sm-5 col-xl-6">
+                  <figure class="store-media mb-2 mb-lg-0">
+                    <img src="assets/images/stores/img-1.jpg" alt="image">
+                  </figure>&lt;!&ndash; End .store-media &ndash;&gt;
+                </div>&lt;!&ndash; End .col-xl-6 &ndash;&gt;
+                <div class="col-sm-7 col-xl-6">
+                  <div class="store-content">
+                    <h3 class="store-title">Wall Street Plaza</h3>&lt;!&ndash; End .store-title &ndash;&gt;
+                    <address>88 Pine St, New York, NY 10005, USA</address>
+                    <div><a href="tel:#">+1 987-876-6543</a></div>
+
+                    <h4 class="store-subtitle">Store Hours:</h4>&lt;!&ndash; End .store-subtitle &ndash;&gt;
+                    <div>Monday - Saturday 11am to 7pm</div>
+                    <div>Sunday 11am to 6pm</div>
+
+                    <a href="#" class="btn btn-link" target="_blank"><span>View Map</span><i class="icon-long-arrow-right"></i></a>
+                  </div>&lt;!&ndash; End .store-content &ndash;&gt;
+                </div>&lt;!&ndash; End .col-xl-6 &ndash;&gt;
+              </div>&lt;!&ndash; End .row &ndash;&gt;
+            </div>&lt;!&ndash; End .store &ndash;&gt;
+          </div>&lt;!&ndash; End .col-lg-6 &ndash;&gt;
+
+          <div class="col-lg-6">
+            <div class="store">
+              <div class="row">
+                <div class="col-sm-5 col-xl-6">
+                  <figure class="store-media mb-2 mb-lg-0">
+                    <img src="assets/images/stores/img-2.jpg" alt="image">
+                  </figure>&lt;!&ndash; End .store-media &ndash;&gt;
+                </div>&lt;!&ndash; End .col-xl-6 &ndash;&gt;
+
+                <div class="col-sm-7 col-xl-6">
+                  <div class="store-content">
+                    <h3 class="store-title">One New York Plaza</h3>&lt;!&ndash; End .store-title &ndash;&gt;
+                    <address>88 Pine St, New York, NY 10005, USA</address>
+                    <div><a href="tel:#">+1 987-876-6543</a></div>
+
+                    <h4 class="store-subtitle">Store Hours:</h4>&lt;!&ndash; End .store-subtitle &ndash;&gt;
+                    <div>Monday - Friday 9am to 8pm</div>
+                    <div>Saturday - 9am to 2pm</div>
+                    <div>Sunday - Closed</div>
+
+                    <a href="#" class="btn btn-link" target="_blank"><span>View Map</span><i class="icon-long-arrow-right"></i></a>
+                  </div>&lt;!&ndash; End .store-content &ndash;&gt;
+                </div>&lt;!&ndash; End .col-xl-6 &ndash;&gt;
+              </div>&lt;!&ndash; End .row &ndash;&gt;
+            </div>&lt;!&ndash; End .store &ndash;&gt;
+          </div>&lt;!&ndash; End .col-lg-6 &ndash;&gt;
+        </div>&lt;!&ndash; End .row &ndash;&gt;
+      </div>&lt;!&ndash; End .stores &ndash;&gt;-->
+    </div><!-- End .container -->
+    <!--<div id="map"></div>&lt;!&ndash; End #map &ndash;&gt;-->
+  </div><!-- End .page-content -->
+</main><!-- End .main -->
+
+<!-- Image Modal -->
+<div class="modal fade" id="image-modal" tabindex="-1" role="dialog" aria-hidden="true">
+  <div class="modal-dialog modal-dialog-centered" role="document">
+    <div class="modal-content">
+      <div class="modal-header text-center">
+        <h4 class="modal-title">Changer la Banière</h4>
+        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+          <span aria-hidden="true"><i class="icon-close"></i></span>
+        </button>
+      </div>
+      <div class="modal-body">
+        <div class="form-box">
+          <div class="container-fluid">
+            <ng-container *ngIf="(imageToChange$ | async ) as result" [ngSwitch]="result.dataState" >
+              <ng-container *ngSwitchCase="DataStateEnum.LOADING">
+                Loading .....
+              </ng-container>
+              <ng-container *ngSwitchCase="DataStateEnum.ERROR">
+                <div class="alert-danger">
+                  {{result.errorMessage}}
+                </div>
+                <div class="modal-footer">
+                  <button (click)="onCloseModal()" type="button" data-dismiss="modal" aria-label="Close" class="btn btn-info" > Fermer </button>
+                </div>
+              </ng-container>
+              <ng-container *ngSwitchCase="DataStateEnum.LOADED">
+                <form *ngIf="!closeModal" style="margin-left: -10%; margin-right: -10%" (submit)="testAndSaveImage(result.data)">
+                  <div class="form-row col-md-12">
+                    <div class="col">
+                      <label>Image :</label>
+                      <img *ngIf=dbImage [src]="dbImage" class="mb-1">
+                      <div class="custom-file">
+                        <input type="file" name="image" class="custom-file-input" (change)="onImageUpload($event)" >
+                        <label class="custom-file-label">Choose file</label>
+                      </div>
+                    </div>
+                    <div class="col ml-auto">
+                      <div class="form-group">
+                        <label >Titre :</label>
+                        <input type="text" name="name" class="form-control" [(ngModel)]="result.data.title">
+                      </div>
+                      <div class="form-group">
+                        <label>Description:</label>
+                        <textarea type="text" name="description" class="form-control" [(ngModel)]="result.data.description"> </textarea>
+                      </div>
+                    </div>
+                  </div>
+                  <button type="button" data-dismiss="modal" aria-label="Close" class="btn btn-info" > Fermer </button>
+                  <button type="submit" class="btn btn-success ml-3" > Valider </button>
+                </form>
+                <div *ngIf="closeModal" class="modal-footer">
+                  <button (click)="onCloseModal()" type="button" data-dismiss="modal" aria-label="Close" class="btn btn-info" > Fermer </button>
+                </div>
+              </ng-container>
+            </ng-container>
+          </div>
+
+        </div><!-- End .form-box -->
+
+      </div><!-- End .modal-body -->
+    </div><!-- End .modal-content -->
+  </div><!-- End .modal-dialog -->
+</div><!-- End .modal -->
+

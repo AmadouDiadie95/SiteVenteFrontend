@@ -1,0 +1,1475 @@
+<!DOCTYPE html>
+<html lang="en">
+
+
+<!-- molla/index-5.html  22 Nov 2019 09:55:58 GMT -->
+<head>
+  <meta charset="UTF-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+  <title>Atelier de Couture</title>
+  <meta name="keywords" content="HTML5 Template">
+  <meta name="description" content="Atelier de Couture">
+  <meta name="author" content="p-themes">
+  <!-- Favicon -->
+  <link rel="apple-touch-icon" sizes="180x180" href="/assets/images/icons/apple-touch-icon.png">
+  <link rel="icon" type="image/png" sizes="32x32" href="/assets/images/icons/favicon-32x32.png">
+  <link rel="icon" type="image/png" sizes="16x16" href="/assets/images/icons/favicon-16x16.png">
+  <link rel="manifest" href="/assets/images/icons/site.html">
+  <link rel="mask-icon" href="/assets/images/icons/safari-pinned-tab.svg" color="#666666">
+  <link rel="shortcut icon" href="/assets/images/icons/favicon.ico">
+  <meta name="apple-mobile-web-app-title" content="Molla">
+  <meta name="application-name" content="Molla">
+  <meta name="msapplication-TileColor" content="#cc9966">
+  <meta name="msapplication-config" content="/assets/images/icons/browserconfig.xml">
+  <meta name="theme-color" content="#ffffff">
+  <!-- Plugins CSS File
+  <link rel="stylesheet" href="/assets/css/bootstrap.min.css">
+  <link rel="stylesheet" href="/assets/css/plugins/owl-carousel/owl.carousel.css">
+  <link rel="stylesheet" href="/assets/css/plugins/magnific-popup/magnific-popup.css">
+  <link rel="stylesheet" href="/assets/css/plugins/jquery.countdown.css">
+  &lt;!&ndash; Main CSS File &ndash;&gt;
+  <link rel="stylesheet" href="/assets/css/style.css">
+  <link rel="stylesheet" href="/assets/css/skins/skin-demo-5.css">
+  <link rel="stylesheet" href="/assets/css/demos/demo-5.css">-->
+</head>
+
+<body>
+<!-------------------------------------------------------------------------------------------->
+<!--<ng-container *ngIf="(listCategories$ | async ) as result" [ngSwitch]="result.dataState" >
+  <ng-container *ngSwitchCase="DataStateEnum.LOADING">
+    Loading .....
+  </ng-container>
+  <ng-container *ngSwitchCase="DataStateEnum.ERROR">
+    <div class="alert-danger">
+      {{result.errorMessage}}
+    </div>
+  </ng-container>
+  <ng-container *ngSwitchCase="DataStateEnum.LOADED">
+    <table class="table">
+      <tr>
+        <th>ID</th>
+        <th>Name</th>
+        <th>Description</th>
+      </tr>
+      <tr *ngFor="let p of result.data._embedded.categories">
+        <td>{{p.id}}</td>
+        <td>{{p.name}}</td>
+        <td>{{p.description}}</td>
+      </tr>
+    </table>
+  </ng-container>
+</ng-container>-->
+<!-------------------------------------------------------------------------------------------->
+<div class="page-wrapper">
+  <header class="header header-5">
+    <div class="header-middle sticky-header">
+      <div class="container-fluid">
+        <div class="header-left">
+          <button class="mobile-menu-toggler">
+            <span class="sr-only">Toggle mobile menu</span>
+            <i class="icon-bars"></i>
+          </button>
+
+          <a href="home" class="logo">
+            <img src="/assets/images/mimiPedro.jpeg" alt="Molla Logo" width="105" height="25">
+          </a>
+
+          <nav class="main-nav">
+            <ul class="menu sf-arrows">
+              <li class="megamenu-container active">
+                <a href="home">Home</a>
+              </li>
+              <li>
+                <a style="cursor: pointer" (click)="redirectOnProductList()" class="sf-with-ul">Produits</a>
+
+                <div class="megamenu megamenu-sm">
+                  <div class="row no-gutters">
+                    <div class="col-md-6">
+                      <div class="menu-col">
+                        <div class="menu-title">Categories</div><!-- End .menu-title -->
+                        <ul>
+                          <li style="cursor: pointer" *ngFor="let category of allCategories"><a (click)="redirectOnProductList('ByCategoryName','categoryName', category.name)">{{category.name}}</a></li>
+                        </ul>
+                      </div><!-- End .menu-col -->
+                    </div><!-- End .col-md-6 -->
+
+                    <div class="col-md-6">
+                      <div class="banner banner-overlay">
+                        <a href="shop/product-list">
+                          <img src="/assets/images/menu/banner-2.jpg" alt="Banner">
+
+                          <div class="banner-content banner-content-bottom">
+                            <div class="banner-title text-white">Bienvenue chez <br><span><strong>MimiPedro</strong></span></div><!-- End .banner-title -->
+                          </div><!-- End .banner-content -->
+                        </a>
+                      </div><!-- End .banner -->
+                    </div><!-- End .col-md-6 -->
+                  </div><!-- End .row -->
+                </div><!-- End .megamenu megamenu-sm -->
+              </li>
+              <li>
+                <a href="shop/category-list">Categories</a>
+              </li>
+              <li>
+                <a href="shop/about">About</a>
+              </li>
+              <li>
+                <a href="shop/contact">Contacts</a>
+              </li>
+              <li *ngIf="isAuthenticated">
+                <a href="" class="sf-with-ul">Admin</a>
+                <div class="megamenu megamenu-sm">
+                  <div class="row no-gutters">
+                    <div class="col-md-6">
+                      <div class="menu-col">
+                        <div class="menu-title">Menu Principale</div><!-- End .menu-title -->
+                        <ul>
+                          <li><a href="#product-modal" data-toggle="modal" (click)="onProductModalOpen()" >Ajouter un Produit</a></li>
+                          <li><a href="#category-modal" data-toggle="modal" >Ajouter une Categorie</a></li>
+                          <li><a href="shop/command-list" >Liste des Commandes</a></li>
+                          <li><a style="cursor:pointer;" (click)="Logout()">Se Deconnecter</a></li>
+                        </ul>
+                      </div><!-- End .menu-col -->
+                    </div><!-- End .col-md-6 -->
+
+                    <div class="col-md-6">
+                      <div class="menu-col">
+                        <ul>
+                          <li><a href="#image-modal" data-toggle="modal" (click)="onChangeImage('header-caroussel-1')">Changer la Banière 1</a></li>
+                          <li><a href="#image-modal" data-toggle="modal" (click)="onChangeImage('header-caroussel-2')">Changer la Banière 2</a></li>
+                          <li><a href="#image-modal" data-toggle="modal" (click)="onChangeImage('middle-banner-1')">Changer la Banière du Milieu</a></li>
+                        </ul>
+                      </div><!-- End .menu-col -->
+                    </div><!-- End .col-md-6 -->
+
+                  </div><!-- End .row -->
+                </div><!-- End .megamenu megamenu-sm -->
+              </li>
+            </ul><!-- End .menu -->
+          </nav><!-- End .main-nav -->
+        </div><!-- End .header-left -->
+
+        <div class="header-right">
+          <div class="header-search header-search-extended header-search-visible">
+            <a href="#" class="search-toggle" role="button"><i class="icon-search"></i></a>
+            <form (submit)="redirectOnProductList('ByNameContains', 'name', productSearchKey)">
+              <div class="header-search-wrapper">
+                <label for="q" class="sr-only">Search</label>
+                <input type="search" class="form-control" name="q" id="q" placeholder="Rechercher un produit ..." [(ngModel)]="productSearchKey" required>
+                <button class="btn btn-primary" type="submit"><i class="icon-search"></i></button>
+              </div><!-- End .header-search-wrapper -->
+            </form>
+          </div><!-- End .header-search -->
+
+        </div><!-- End .header-right -->
+      </div><!-- End .container-fluid -->
+    </div><!-- End .header-middle -->
+  </header><!-- End .header -->
+
+  <main class="main">
+    <div class="intro-slider-container mb-0">
+      <div class="intro-slider owl-carousel owl-theme owl-nav-inside owl-light" data-toggle="owl" data-owl-options='{"nav": false, "dots": false}'>
+
+
+        <div class="intro-slide" [style]="'background-image: url(' + imageHeaderCar1.image + ');'">
+          <div class="container intro-content text-center">
+            <h3 class="intro-subtitle text-white"> {{imageHeaderCar1.title}} </h3> <br><!-- End .h3 intro-subtitle -->
+            <h1 class="intro-title text-white"> {{imageHeaderCar1.description}} </h1><!-- End .intro-title -->
+            <div class="intro-text text-white">Boutique en ligne</div><!-- End .intro-text -->
+            <a href="shop/category-list" class="btn btn-primary">Decouvrir le Catalogue</a>
+          </div><!-- End .intro-content -->
+        </div><!-- End .intro-slide -->
+
+        <div class="intro-slide" [style]="'background-image: url(' + imageHeaderCar2.image + ');'">
+          <div class="container intro-content text-center">
+            <h3 class="intro-subtitle text-white"> {{imageHeaderCar2.title}} </h3> <br><!-- End .h3 intro-subtitle -->
+            <h1 class="intro-title text-white"> {{imageHeaderCar2.description}} </h1><!-- End .intro-title -->
+            <div class="intro-text text-white">Boutique en ligne</div><!-- End .intro-text -->
+            <a href="shop/category-list" class="btn btn-primary">Decouvrir le Catalogue</a>
+          </div><!-- End .intro-content -->
+        </div><!-- End .intro-slide -->
+
+      </div><!-- End .intro-slider owl-carousel owl-theme -->
+
+      <span class="slider-loader text-white"></span><!-- End .slider-loader -->
+    </div><!-- End .intro-slider-container -->
+
+    <div class="container mt-5">
+      <div class="banner-group">
+        <div class="row">
+          <div class="col-md-6">
+            <div class="banner">
+              <a *ngIf="isAuthenticated" href="#image-modal" data-toggle="modal" >
+                <img [src]="imageHeaderBanner1.image" alt="Banner" (click)="onChangeImage('header-banner-1')">
+              </a>
+              <a *ngIf="!isAuthenticated">
+                <img [src]="imageHeaderBanner1.image" alt="Banner">
+              </a>
+
+              <div class="banner-content">
+                <h4 class="banner-subtitle"><a>{{imageHeaderBanner1.title}}</a></h4><!-- End .banner-subtitle -->
+                <h3 class="banner-title"><a><span>{{imageHeaderBanner1.description}}<br></span></a></h3><!-- End .banner-title -->
+                <a href="shop/category-list" class="btn btn-outline-info-2 banner-link">Decouvrir<i class="icon-long-arrow-right"></i></a>
+              </div><!-- End .banner-content -->
+
+            </div><!-- End .banner -->
+          </div><!-- End .col-md-6-->
+
+          <div class="col-md-6">
+            <div class="banner">
+              <a *ngIf="isAuthenticated" href="#image-modal" data-toggle="modal" >
+                <img [src]="imageHeaderBanner2.image" alt="Banner" (click)="onChangeImage('header-banner-2')">
+              </a>
+              <a *ngIf="!isAuthenticated">
+                <img [src]="imageHeaderBanner2.image" alt="Banner">
+              </a>
+
+              <div class="banner-content">
+                <h4 class="banner-subtitle"><a>{{imageHeaderBanner2.title}}</a></h4><!-- End .banner-subtitle -->
+                <h3 class="banner-title"><a><span>{{imageHeaderBanner2.description}}<br></span></a></h3><!-- End .banner-title -->
+                <a href="#" class="btn btn-outline-info-2 banner-link">Decouvrir<i class="icon-long-arrow-right"></i></a>
+              </div><!-- End .banner-content -->
+
+            </div><!-- End .banner -->
+
+            <div class="banner">
+              <a *ngIf="isAuthenticated" href="#image-modal" data-toggle="modal" >
+                <img [src]="imageHeaderBanner3.image" alt="Banner" (click)="onChangeImage('header-banner-3')">
+              </a>
+              <a *ngIf="!isAuthenticated">
+                <img [src]="imageHeaderBanner3.image" alt="Banner">
+              </a>
+
+              <div class="banner-content">
+                <h4 class="banner-subtitle"><a>{{imageHeaderBanner3.title}}</a></h4><!-- End .banner-subtitle -->
+                <h3 class="banner-title"><a><span>{{imageHeaderBanner3.description}}<br></span></a></h3><!-- End .banner-title -->
+                <a href="#" class="btn btn-outline-info-2 banner-link">Decouvrir<i class="icon-long-arrow-right"></i></a>
+              </div><!-- End .banner-content -->
+
+            </div><!-- End .banner -->
+          </div><!-- End .col-md-6 -->
+        </div><!-- End .row -->
+      </div><!-- End .banner-group -->
+    </div><!-- End .container -->
+
+    <div class="mb-4"></div><!-- End .mb-6 -->
+
+    <div class="container">
+      <div class="heading heading-center mb-3">
+        <h2 class="title">Les Plus Populaires</h2><!-- End .title -->
+
+        <ul class="nav nav-pills justify-content-center" role="tablist">
+          <li class="nav-item">
+            <a class="nav-link active" id="new-all-link2" data-toggle="tab" href="#new-all-tab2" role="tab" aria-controls="new-all-tab2" aria-selected="true">All</a>
+          </li>
+         <!-- <li class="nav-item">
+            <a class="nav-link" id="new-cloth-link2" data-toggle="tab" href="#new-cloth-tab2" role="tab" aria-controls="new-cloth-tab2" aria-selected="false">Clothing</a>
+          </li>
+          <li class="nav-item">
+            <a class="nav-link" id="new-shoes-link2" data-toggle="tab" href="#new-shoes-tab2" role="tab" aria-controls="new-shoes-tab2" aria-selected="false">Shoes & Boots</a>
+          </li>
+          <li class="nav-item">
+            <a class="nav-link" id="new-access-link2" data-toggle="tab" href="#new-access-tab2" role="tab" aria-controls="new-access-tab2" aria-selected="false">Accessories</a>
+          </li>-->
+        </ul>
+      </div><!-- End .heading -->
+
+      <div class="tab-content tab-content-carousel">
+        <div class="tab-pane p-0 fade show active" id="new-all-tab2" role="tabpanel" aria-labelledby="new-all-link2">
+          <div class="products">
+            <div class="row justify-content-center">
+
+              <div *ngFor="let popularProduct of allPopularsProducts" class="col-6 col-md-4 col-lg-3">
+                <div class="product product-2">
+                  <figure class="product-media">
+                    <span *ngIf="popularProduct.newProduct" class="product-label label-new">Nouveauté</span>
+                    <span *ngIf="popularProduct.populary" class="product-label label-new">Populaire</span>
+                    <a style="cursor:pointer;" (click)="showOneProduct(popularProduct.id)">
+                      <img [src]="popularProduct.image" alt="Product image" class="product-image">
+                      <img [src]="popularProduct.image2" alt="Product image" class="product-image-hover">
+                    </a>
+
+                    <div *ngIf="isAuthenticated" class="product-action-vertical">
+                      <a href="#product-modal" data-toggle="modal" class="btn-product-icon icon-info-circle btn-expandable" (click)="onProductModalOpen(popularProduct)" title="Modifier"><span>Modifier</span></a>
+                    </div><!-- End .product-action -->
+
+                    <div class="product-action product-action-transparent">
+                      <a style="cursor:pointer;" (click)="showOneProduct(popularProduct.id)" class="btn-product btn-cart"><span>Commander</span></a>
+                    </div><!-- End .product-action -->
+                  </figure><!-- End .product-media -->
+
+                  <div class="product-body">
+                    <div class="product-cat">
+                      <a style="cursor:pointer;" (click)="redirectOnProductList('ByCategoryName','categoryName', popularProduct.categoryName)">{{popularProduct.categoryName}}</a>
+                    </div><!-- End .product-cat -->
+                    <h3 class="product-title"><a style="cursor:pointer;" (click)="showOneProduct(popularProduct.id)">{{popularProduct.name}}</a></h3><!-- End .product-title -->
+                    <div class="product-price">
+                      {{popularProduct.price}} Fcfa
+                    </div><!-- End .product-price -->
+                  </div><!-- End .product-body -->
+                </div><!-- End .product -->
+              </div><!-- End .col-sm-6 col-md-4 col-lg-3 -->
+
+            </div><!-- End .row -->
+          </div><!-- End .products -->
+        </div><!-- .End .tab-pane -->
+<!--        <div class="tab-pane p-0 fade" id="new-cloth-tab2" role="tabpanel" aria-labelledby="new-cloth-link2">
+          <div class="products">
+            <div class="row justify-content-center">
+              <div class="col-6 col-md-4 col-lg-3">
+                <div class="product product-2">
+                  <figure class="product-media">
+                    <a href="product.html">
+                      <img src="/assets/images/demos/demo-5/products/product-5-1.jpg" alt="Product image" class="product-image">
+                      <img src="/assets/images/demos/demo-5/products/product-5-2.jpg" alt="Product image" class="product-image-hover">
+                    </a>
+
+                    <div class="product-action-vertical">
+                      <a href="#" class="btn-product-icon btn-wishlist" title="Add to wishlist"><span>add to wishlist</span></a>
+                    </div>&lt;!&ndash; End .product-action &ndash;&gt;
+
+                    <div class="product-action product-action-transparent">
+                      <a href="#" class="btn-product btn-cart"><span>add to cart</span></a>
+                    </div>&lt;!&ndash; End .product-action &ndash;&gt;
+                  </figure>&lt;!&ndash; End .product-media &ndash;&gt;
+
+                  <div class="product-body">
+                    <div class="product-cat">
+                      <a href="#">Clothing</a>
+                    </div>&lt;!&ndash; End .product-cat &ndash;&gt;
+                    <h3 class="product-title"><a href="product.html">Linen-blend dress</a></h3>&lt;!&ndash; End .product-title &ndash;&gt;
+                    <div class="product-price">
+                      $60.00
+                    </div>&lt;!&ndash; End .product-price &ndash;&gt;
+                    <div class="product-nav product-nav-dots">
+                      <a href="#" class="active" style="background: #e5dcb1;"><span class="sr-only">Color name</span></a>
+                      <a href="#" style="background: #b9cbd8;"><span class="sr-only">Color name</span></a>
+                    </div>&lt;!&ndash; End .product-nav &ndash;&gt;
+                  </div>&lt;!&ndash; End .product-body &ndash;&gt;
+                </div>&lt;!&ndash; End .product &ndash;&gt;
+              </div>&lt;!&ndash; End .col-sm-6 col-md-4 col-lg-3 &ndash;&gt;
+              <div class="col-6 col-md-4 col-lg-3">
+                <div class="product product-2">
+                  <figure class="product-media">
+                    <a href="product.html">
+                      <img src="/assets/images/demos/demo-5/products/product-7-1.jpg" alt="Product image" class="product-image">
+                      <img src="/assets/images/demos/demo-5/products/product-7-2.jpg" alt="Product image" class="product-image-hover">
+                    </a>
+
+                    <div class="product-action-vertical">
+                      <a href="#" class="btn-product-icon btn-wishlist" title="Add to wishlist"><span>add to wishlist</span></a>
+                    </div>&lt;!&ndash; End .product-action &ndash;&gt;
+
+                    <div class="product-action product-action-transparent">
+                      <a href="#" class="btn-product btn-cart"><span>add to cart</span></a>
+                    </div>&lt;!&ndash; End .product-action &ndash;&gt;
+                  </figure>&lt;!&ndash; End .product-media &ndash;&gt;
+
+                  <div class="product-body">
+                    <div class="product-cat">
+                      <a href="#">Clothing</a>
+                    </div>&lt;!&ndash; End .product-cat &ndash;&gt;
+                    <h3 class="product-title"><a href="product.html">Paper bag trousers</a></h3>&lt;!&ndash; End .product-title &ndash;&gt;
+                    <div class="product-price">
+                      $60.00
+                    </div>&lt;!&ndash; End .product-price &ndash;&gt;
+                    <div class="product-nav product-nav-dots">
+                      <a href="#" class="active" style="background: #9fac76;"><span class="sr-only">Color name</span></a>
+                      <a href="#" style="background: #333333;"><span class="sr-only">Color name</span></a>
+                    </div>&lt;!&ndash; End .product-nav &ndash;&gt;
+                  </div>&lt;!&ndash; End .product-body &ndash;&gt;
+                </div>&lt;!&ndash; End .product &ndash;&gt;
+              </div>&lt;!&ndash; End .col-sm-6 col-md-4 col-lg-3 &ndash;&gt;
+              <div class="col-6 col-md-4 col-lg-3">
+                <div class="product product-2">
+                  <figure class="product-media">
+                    <a href="product.html">
+                      <img src="/assets/images/demos/demo-5/products/product-10-1.jpg" alt="Product image" class="product-image">
+                      <img src="/assets/images/demos/demo-5/products/product-10-2.jpg" alt="Product image" class="product-image-hover">
+                    </a>
+
+                    <div class="product-action-vertical">
+                      <a href="#" class="btn-product-icon btn-wishlist" title="Add to wishlist"><span>add to wishlist</span></a>
+                    </div>&lt;!&ndash; End .product-action &ndash;&gt;
+
+                    <div class="product-action product-action-transparent">
+                      <a href="#" class="btn-product btn-cart"><span>add to cart</span></a>
+                    </div>&lt;!&ndash; End .product-action &ndash;&gt;
+                  </figure>&lt;!&ndash; End .product-media &ndash;&gt;
+
+                  <div class="product-body">
+                    <div class="product-cat">
+                      <a href="#">Clothing</a>
+                    </div>&lt;!&ndash; End .product-cat &ndash;&gt;
+                    <h3 class="product-title"><a href="product.html">Silk-blend kaftan</a></h3>&lt;!&ndash; End .product-title &ndash;&gt;
+                    <div class="product-price">
+                      Now $370.00
+                    </div>&lt;!&ndash; End .product-price &ndash;&gt;
+                  </div>&lt;!&ndash; End .product-body &ndash;&gt;
+                </div>&lt;!&ndash; End .product &ndash;&gt;
+              </div>&lt;!&ndash; End .col-sm-6 col-md-4 col-lg-3 &ndash;&gt;
+              <div class="col-6 col-md-4 col-lg-3">
+                <div class="product product-2">
+                  <figure class="product-media">
+                    <a href="product.html">
+                      <img src="/assets/images/demos/demo-5/products/product-11-1.jpg" alt="Product image" class="product-image">
+                      <img src="/assets/images/demos/demo-5/products/product-11-2.jpg" alt="Product image" class="product-image-hover">
+                    </a>
+
+                    <div class="product-action-vertical">
+                      <a href="#" class="btn-product-icon btn-wishlist" title="Add to wishlist"><span>add to wishlist</span></a>
+                    </div>&lt;!&ndash; End .product-action &ndash;&gt;
+
+                    <div class="product-action product-action-transparent">
+                      <a href="#" class="btn-product btn-cart"><span>add to cart</span></a>
+                    </div>&lt;!&ndash; End .product-action &ndash;&gt;
+                  </figure>&lt;!&ndash; End .product-media &ndash;&gt;
+
+                  <div class="product-body">
+                    <div class="product-cat">
+                      <a href="#">Clothing</a>
+                    </div>&lt;!&ndash; End .product-cat &ndash;&gt;
+                    <h3 class="product-title"><a href="product.html">Linen-blend jumpsuit</a></h3>&lt;!&ndash; End .product-title &ndash;&gt;
+                    <div class="product-price">
+                      $595.00
+                    </div>&lt;!&ndash; End .product-price &ndash;&gt;
+                  </div>&lt;!&ndash; End .product-body &ndash;&gt;
+                </div>&lt;!&ndash; End .product &ndash;&gt;
+              </div>&lt;!&ndash; End .col-sm-6 col-md-4 col-lg-3 &ndash;&gt;
+            </div>&lt;!&ndash; End .row &ndash;&gt;
+          </div>&lt;!&ndash; End .products &ndash;&gt;
+        </div>&lt;!&ndash; .End .tab-pane &ndash;&gt;
+        <div class="tab-pane p-0 fade" id="new-shoes-tab2" role="tabpanel" aria-labelledby="new-shoes-link2">
+          <div class="products">
+            <div class="row justify-content-center">
+              <div class="col-6 col-md-4 col-lg-3">
+                <div class="product product-2">
+                  <figure class="product-media">
+                    <a href="product.html">
+                      <img src="/assets/images/demos/demo-5/products/product-6-1.jpg" alt="Product image" class="product-image">
+                      <img src="/assets/images/demos/demo-5/products/product-6-2.jpg" alt="Product image" class="product-image-hover">
+                    </a>
+
+                    <div class="product-action-vertical">
+                      <a href="#" class="btn-product-icon btn-wishlist" title="Add to wishlist"><span>add to wishlist</span></a>
+                    </div>&lt;!&ndash; End .product-action &ndash;&gt;
+
+                    <div class="product-action product-action-transparent">
+                      <a href="#" class="btn-product btn-cart"><span>add to cart</span></a>
+                    </div>&lt;!&ndash; End .product-action &ndash;&gt;
+                  </figure>&lt;!&ndash; End .product-media &ndash;&gt;
+
+                  <div class="product-body">
+                    <div class="product-cat">
+                      <a href="#">Shoes</a>
+                    </div>&lt;!&ndash; End .product-cat &ndash;&gt;
+                    <h3 class="product-title"><a href="product.html">Sandals with lacing</a></h3>&lt;!&ndash; End .product-title &ndash;&gt;
+                    <div class="product-price">
+                      <span class="new-price">Now $70.00</span>
+                      <span class="old-price">Was $155.00</span>
+                    </div>&lt;!&ndash; End .product-price &ndash;&gt;
+                  </div>&lt;!&ndash; End .product-body &ndash;&gt;
+                </div>&lt;!&ndash; End .product &ndash;&gt;
+              </div>&lt;!&ndash; End .col-sm-6 col-md-4 col-lg-3 &ndash;&gt;
+              <div class="col-6 col-md-4 col-lg-3">
+                <div class="product product-2">
+                  <figure class="product-media">
+                    <a href="product.html">
+                      <img src="/assets/images/demos/demo-5/products/product-12-1.jpg" alt="Product image" class="product-image">
+                      <img src="/assets/images/demos/demo-5/products/product-12-2.jpg" alt="Product image" class="product-image-hover">
+                    </a>
+
+                    <div class="product-action-vertical">
+                      <a href="#" class="btn-product-icon btn-wishlist" title="Add to wishlist"><span>add to wishlist</span></a>
+                    </div>&lt;!&ndash; End .product-action &ndash;&gt;
+
+                    <div class="product-action product-action-transparent">
+                      <a href="#" class="btn-product btn-cart"><span>add to cart</span></a>
+                    </div>&lt;!&ndash; End .product-action &ndash;&gt;
+                  </figure>&lt;!&ndash; End .product-media &ndash;&gt;
+
+                  <div class="product-body">
+                    <div class="product-cat">
+                      <a href="#">Shoes</a>
+                    </div>&lt;!&ndash; End .product-cat &ndash;&gt;
+                    <h3 class="product-title"><a href="product.html">Sandals</a></h3>&lt;!&ndash; End .product-title &ndash;&gt;
+                    <div class="product-price">
+                      <span class="new-price">Now $120.00</span>
+                      <span class="old-price">Was $140.00</span>
+                    </div>&lt;!&ndash; End .product-price &ndash;&gt;
+                  </div>&lt;!&ndash; End .product-body &ndash;&gt;
+                </div>&lt;!&ndash; End .product &ndash;&gt;
+              </div>&lt;!&ndash; End .col-sm-6 col-md-4 col-lg-3 &ndash;&gt;
+            </div>&lt;!&ndash; End .row &ndash;&gt;
+          </div>&lt;!&ndash; End .products &ndash;&gt;
+        </div>&lt;!&ndash; .End .tab-pane &ndash;&gt;
+        <div class="tab-pane p-0 fade" id="new-access-tab2" role="tabpanel" aria-labelledby="new-access-link2">
+          <div class="products">
+            <div class="row justify-content-center">
+              <div class="col-6 col-md-4 col-lg-3">
+                <div class="product product-2">
+                  <figure class="product-media">
+                    <a href="product.html">
+                      <img src="/assets/images/demos/demo-5/products/product-8-1.jpg" alt="Product image" class="product-image">
+                      <img src="/assets/images/demos/demo-5/products/product-8-2.jpg" alt="Product image" class="product-image-hover">
+                    </a>
+
+                    <div class="product-action-vertical">
+                      <a href="#" class="btn-product-icon btn-wishlist" title="Add to wishlist"><span>add to wishlist</span></a>
+                    </div>&lt;!&ndash; End .product-action &ndash;&gt;
+
+                    <div class="product-action product-action-transparent">
+                      <a href="#" class="btn-product btn-cart"><span>add to cart</span></a>
+                    </div>&lt;!&ndash; End .product-action &ndash;&gt;
+                  </figure>&lt;!&ndash; End .product-media &ndash;&gt;
+
+                  <div class="product-body">
+                    <div class="product-cat">
+                      <a href="#">Handbags</a>
+                    </div>&lt;!&ndash; End .product-cat &ndash;&gt;
+                    <h3 class="product-title"><a href="product.html">Paper straw shopper</a></h3>&lt;!&ndash; End .product-title &ndash;&gt;
+                    <div class="product-price">
+                      $398.00
+                    </div>&lt;!&ndash; End .product-price &ndash;&gt;
+                  </div>&lt;!&ndash; End .product-body &ndash;&gt;
+                </div>&lt;!&ndash; End .product &ndash;&gt;
+              </div>&lt;!&ndash; End .col-sm-6 col-md-4 col-lg-3 &ndash;&gt;
+              <div class="col-6 col-md-4 col-lg-3">
+                <div class="product product-2">
+                  <figure class="product-media">
+                    <a href="product.html">
+                      <img src="/assets/images/demos/demo-5/products/product-9-1.jpg" alt="Product image" class="product-image">
+                      <img src="/assets/images/demos/demo-5/products/product-9-2.jpg" alt="Product image" class="product-image-hover">
+                    </a>
+
+                    <div class="product-action-vertical">
+                      <a href="#" class="btn-product-icon btn-wishlist" title="Add to wishlist"><span>add to wishlist</span></a>
+                    </div>&lt;!&ndash; End .product-action &ndash;&gt;
+
+                    <div class="product-action product-action-transparent">
+                      <a href="#" class="btn-product btn-cart"><span>add to cart</span></a>
+                    </div>&lt;!&ndash; End .product-action &ndash;&gt;
+                  </figure>&lt;!&ndash; End .product-media &ndash;&gt;
+
+                  <div class="product-body">
+                    <div class="product-cat">
+                      <a href="#">Handbags</a>
+                    </div>&lt;!&ndash; End .product-cat &ndash;&gt;
+                    <h3 class="product-title"><a href="product.html">Bucket bag</a></h3>&lt;!&ndash; End .product-title &ndash;&gt;
+                    <div class="product-price">
+                      $350.00
+                    </div>&lt;!&ndash; End .product-price &ndash;&gt;
+                    <div class="product-nav product-nav-dots">
+                      <a href="#" class="active" style="background: #e3a84d;"><span class="sr-only">Color name</span></a>
+                      <a href="#" style="background: #f48a5b;"><span class="sr-only">Color name</span></a>
+                      <a href="#" style="background: #333333;"><span class="sr-only">Color name</span></a>
+                    </div>&lt;!&ndash; End .product-nav &ndash;&gt;
+                  </div>&lt;!&ndash; End .product-body &ndash;&gt;
+                </div>&lt;!&ndash; End .product &ndash;&gt;
+              </div>&lt;!&ndash; End .col-sm-6 col-md-4 col-lg-3 &ndash;&gt;
+            </div>&lt;!&ndash; End .row &ndash;&gt;
+          </div>&lt;!&ndash; End .products &ndash;&gt;
+        </div>&lt;!&ndash; .End .tab-pane &ndash;&gt;-->
+      </div><!-- End .tab-content -->
+    </div><!-- End .container -->
+
+
+    <div class="mb-5"></div><!-- End .mb-5 -->
+
+    <div class="video-banner video-banner-bg bg-image text-center" [style]="'background-image: url(' + imageMiddleBanner.image + ')'">
+      <div class="container">
+        <h3 class="video-banner-title h1 text-white"><span>{{imageMiddleBanner.title}}</span><strong>{{imageMiddleBanner.description}}</strong></h3><!-- End .video-banner-title -->
+<!--
+        <a href="https://www.youtube.com/watch?v=vBPgmASQ1A0" class="btn-video btn-iframe"><i class="icon-play"></i></a>
+-->
+
+      </div><!-- End .container -->
+    </div><!-- End .video-banner bg-image -->
+
+    <div class="pt-6 pb-6" style="background-color: #fff;">
+      <div class="container">
+        <div class="banner-set">
+          <div class="row">
+            <div class="col-lg-6">
+              <div class="banner-set-content text-center">
+                <div class="set-content-wrapper">
+                  <h4>{{imageMiddleBanner2.title}}</h4>
+                  <h2>{{imageMiddleBanner2.description}}.</h2>
+
+                 <!-- <p>Premier arrivé, Premier Servis - Stock Limité! </p>-->
+
+                  <div class="banner-set-products">
+                    <div class="row">
+                      <div class="products">
+                        <div class="col-6">
+                          <div class="product product-2 text-center">
+                            <figure class="product-media">
+                              <a *ngIf="isAuthenticated" href="#promo-modal" (click)="promoProductModalSelected = 1" data-toggle="modal">
+                                <img [src]="promoProduct1.image" alt="Product image" class="product-image">
+                              </a>
+                              <a *ngIf="!isAuthenticated" style="cursor: pointer;" (click)="showOneProduct(promoProduct1.id)">
+                                <img [src]="promoProduct1.image" alt="Product image" class="product-image">
+                              </a>
+                            </figure><!-- End .product-media -->
+
+                            <div class="product-body">
+                              <h3 class="product-title"><a style="cursor: pointer;" (click)="showOneProduct(promoProduct1.id)">{{promoProduct1.name}}</a></h3><!-- End .product-title -->
+                              <div class="product-price">
+                                {{promoProduct1.price}} Fcfa
+                              </div><!-- End .product-price -->
+                            </div><!-- End .product-body -->
+                          </div><!-- End .product -->
+                        </div><!-- End .col-sm-6 -->
+
+                        <div class="col-6">
+                          <div class="product product-2 text-center">
+                            <figure class="product-media">
+                              <a *ngIf="isAuthenticated" href="#promo-modal" (click)="promoProductModalSelected = 2" data-toggle="modal">
+                                <img [src]="promoProduct2.image" alt="Product image" class="product-image">
+                              </a>
+                              <a *ngIf="!isAuthenticated" style="cursor: pointer;" (click)="showOneProduct(promoProduct2.id)">
+                                <img [src]="promoProduct2.image" alt="Product image" class="product-image">
+                              </a>
+                            </figure><!-- End .product-media -->
+
+                            <div class="product-body">
+                              <h3 class="product-title"><a style="cursor: pointer;" (click)="showOneProduct(promoProduct2.id)">{{promoProduct2.name}}</a></h3><!-- End .product-title -->
+                              <div class="product-price">
+                                {{promoProduct2.price}} Fcfa
+                              </div><!-- End .product-price -->
+                            </div><!-- End .product-body -->
+                          </div><!-- End .product -->
+                        </div><!-- End .col-sm-6 -->
+                      </div>
+                    </div><!-- End .row -->
+                  </div><!-- End .banner-set-products -->
+                </div><!-- End .set-content-wrapper -->
+              </div><!-- End .banner-set-content -->
+            </div><!-- End .col-lg-6 -->
+            <div class="col-lg-6">
+              <div class="banner-set-image">
+                <a *ngIf="isAuthenticated" href="#image-modal" data-toggle="modal">
+                  <img [src]="imageMiddleBanner2.image" (click)="onChangeImage('middle-banner-2')" alt="banner">
+                </a>
+                <a *ngIf="!isAuthenticated">
+                  <img [src]="imageMiddleBanner2.image" alt="banner">
+                </a>
+              </div><!-- End .banner-set-image -->
+            </div><!-- End .col-lg-6 -->
+          </div><!-- End .row -->
+        </div><!-- End .banner-set -->
+      </div><!-- End .container -->
+    </div><!-- End .bg-lighter pt6 pb-6 -->
+
+    <div class="container pt-6 new-arrivals">
+      <div class="heading heading-center mb-3">
+        <h2 class="title">Nouveautés</h2><!-- End .title -->
+
+        <ul class="nav nav-pills justify-content-center" role="tablist">
+          <li class="nav-item">
+            <a class="nav-link active" id="new-all-link" data-toggle="tab" href="#new-all-tab" role="tab" aria-controls="new-all-tab" aria-selected="true">All</a>
+          </li>
+          <!--<li class="nav-item">
+            <a class="nav-link" id="new-cloth-link" data-toggle="tab" href="#new-cloth-tab" role="tab" aria-controls="new-cloth-tab" aria-selected="false">Clothing</a>
+          </li>
+          <li class="nav-item">
+            <a class="nav-link" id="new-shoes-link" data-toggle="tab" href="#new-shoes-tab" role="tab" aria-controls="new-shoes-tab" aria-selected="false">Shoes & Boots</a>
+          </li>
+          <li class="nav-item">
+            <a class="nav-link" id="new-access-link" data-toggle="tab" href="#new-access-tab" role="tab" aria-controls="new-access-tab" aria-selected="false">Accessories</a>
+          </li>-->
+        </ul>
+      </div><!-- End .heading -->
+
+      <div class="tab-content">
+        <div class="tab-pane p-0 fade show active" id="new-all-tab" role="tabpanel" aria-labelledby="new-all-link">
+          <div class="products">
+            <div class="row justify-content-center">
+
+              <div *ngFor="let new_product of allNewProducts" class="col-6 col-md-4 col-lg-3">
+                <div class="product product-2">
+                  <figure class="product-media">
+                    <span *ngIf="new_product.newProduct" class="product-label label-new">Nouveauté</span>
+                    <span *ngIf="new_product.populary" class="product-label label-new">Populaire</span>
+                    <a style="cursor:pointer;" (click)="showOneProduct(new_product.id)">
+                      <img [src]="new_product.image" alt="Product image" class="product-image">
+                      <img [src]="new_product.image2" alt="Product image" class="product-image-hover">
+                    </a>
+
+                    <div *ngIf="isAuthenticated"  class="product-action-vertical">
+                      <a href="#product-modal"  data-toggle="modal"  class="btn-product-icon icon-info-circle btn-expandable" (click)="onProductModalOpen(new_product)" title="Modifier"><span>Modifier</span></a>
+                    </div><!-- End .product-action -->
+
+                    <div class="product-action product-action-transparent">
+                      <a style="cursor:pointer;" (click)="showOneProduct(new_product.id)" class="btn-product btn-cart"><span>Commander</span></a>
+                    </div><!-- End .product-action -->
+                  </figure><!-- End .product-media -->
+
+                  <div class="product-body">
+                    <div class="product-cat">
+                      <a style="cursor: pointer;" (click)="redirectOnProductList('ByCategoryName','categoryName', new_product.name)">{{new_product.categoryName}}</a>
+                    </div><!-- End .product-cat -->
+                    <h3 class="product-title"><a style="cursor:pointer;" (click)="showOneProduct(new_product.id)">{{new_product.name}}</a></h3><!-- End .product-title -->
+                    <div class="product-price">
+                      {{new_product.price}} Fcfa
+                    </div><!-- End .product-price -->
+                  </div><!-- End .product-body -->
+                </div><!-- End .product -->
+              </div><!-- End .col-sm-6 col-md-4 col-lg-3 -->
+
+            </div><!-- End .row -->
+          </div><!-- End .products -->
+        </div><!-- .End .tab-pane -->
+<!--        <div class="tab-pane p-0 fade" id="new-cloth-tab" role="tabpanel" aria-labelledby="new-cloth-link">
+          <div class="products">
+            <div class="row justify-content-center">
+              <div class="col-6 col-md-4 col-lg-3">
+                <div class="product product-2">
+                  <figure class="product-media">
+                    <a href="product.html">
+                      <img src="/assets/images/demos/demo-5/products/product-5-1.jpg" alt="Product image" class="product-image">
+                      <img src="/assets/images/demos/demo-5/products/product-5-2.jpg" alt="Product image" class="product-image-hover">
+                    </a>
+
+                    <div class="product-action-vertical">
+                      <a href="#" class="btn-product-icon btn-wishlist" title="Add to wishlist"><span>add to wishlist</span></a>
+                    </div>&lt;!&ndash; End .product-action &ndash;&gt;
+
+                    <div class="product-action product-action-transparent">
+                      <a href="#" class="btn-product btn-cart"><span>add to cart</span></a>
+                    </div>&lt;!&ndash; End .product-action &ndash;&gt;
+                  </figure>&lt;!&ndash; End .product-media &ndash;&gt;
+
+                  <div class="product-body">
+                    <div class="product-cat">
+                      <a href="#">Clothing</a>
+                    </div>&lt;!&ndash; End .product-cat &ndash;&gt;
+                    <h3 class="product-title"><a href="product.html">Linen-blend dress</a></h3>&lt;!&ndash; End .product-title &ndash;&gt;
+                    <div class="product-price">
+                      $60.00
+                    </div>&lt;!&ndash; End .product-price &ndash;&gt;
+                    <div class="product-nav product-nav-dots">
+                      <a href="#" class="active" style="background: #e5dcb1;"><span class="sr-only">Color name</span></a>
+                      <a href="#" style="background: #b9cbd8;"><span class="sr-only">Color name</span></a>
+                    </div>&lt;!&ndash; End .product-nav &ndash;&gt;
+                  </div>&lt;!&ndash; End .product-body &ndash;&gt;
+                </div>&lt;!&ndash; End .product &ndash;&gt;
+              </div>&lt;!&ndash; End .col-sm-6 col-md-4 col-lg-3 &ndash;&gt;
+              <div class="col-6 col-md-4 col-lg-3">
+                <div class="product product-2">
+                  <figure class="product-media">
+                    <a href="product.html">
+                      <img src="/assets/images/demos/demo-5/products/product-7-1.jpg" alt="Product image" class="product-image">
+                      <img src="/assets/images/demos/demo-5/products/product-7-2.jpg" alt="Product image" class="product-image-hover">
+                    </a>
+
+                    <div class="product-action-vertical">
+                      <a href="#" class="btn-product-icon btn-wishlist" title="Add to wishlist"><span>add to wishlist</span></a>
+                    </div>&lt;!&ndash; End .product-action &ndash;&gt;
+
+                    <div class="product-action product-action-transparent">
+                      <a href="#" class="btn-product btn-cart"><span>add to cart</span></a>
+                    </div>&lt;!&ndash; End .product-action &ndash;&gt;
+                  </figure>&lt;!&ndash; End .product-media &ndash;&gt;
+
+                  <div class="product-body">
+                    <div class="product-cat">
+                      <a href="#">Clothing</a>
+                    </div>&lt;!&ndash; End .product-cat &ndash;&gt;
+                    <h3 class="product-title"><a href="product.html">Paper bag trousers</a></h3>&lt;!&ndash; End .product-title &ndash;&gt;
+                    <div class="product-price">
+                      $60.00
+                    </div>&lt;!&ndash; End .product-price &ndash;&gt;
+                    <div class="product-nav product-nav-dots">
+                      <a href="#" class="active" style="background: #9fac76;"><span class="sr-only">Color name</span></a>
+                      <a href="#" style="background: #333333;"><span class="sr-only">Color name</span></a>
+                    </div>&lt;!&ndash; End .product-nav &ndash;&gt;
+                  </div>&lt;!&ndash; End .product-body &ndash;&gt;
+                </div>&lt;!&ndash; End .product &ndash;&gt;
+              </div>&lt;!&ndash; End .col-sm-6 col-md-4 col-lg-3 &ndash;&gt;
+              <div class="col-6 col-md-4 col-lg-3">
+                <div class="product product-2">
+                  <figure class="product-media">
+                    <a href="product.html">
+                      <img src="/assets/images/demos/demo-5/products/product-10-1.jpg" alt="Product image" class="product-image">
+                      <img src="/assets/images/demos/demo-5/products/product-10-2.jpg" alt="Product image" class="product-image-hover">
+                    </a>
+
+                    <div class="product-action-vertical">
+                      <a href="#" class="btn-product-icon btn-wishlist" title="Add to wishlist"><span>add to wishlist</span></a>
+                    </div>&lt;!&ndash; End .product-action &ndash;&gt;
+
+                    <div class="product-action product-action-transparent">
+                      <a href="#" class="btn-product btn-cart"><span>add to cart</span></a>
+                    </div>&lt;!&ndash; End .product-action &ndash;&gt;
+                  </figure>&lt;!&ndash; End .product-media &ndash;&gt;
+
+                  <div class="product-body">
+                    <div class="product-cat">
+                      <a href="#">Clothing</a>
+                    </div>&lt;!&ndash; End .product-cat &ndash;&gt;
+                    <h3 class="product-title"><a href="product.html">Silk-blend kaftan</a></h3>&lt;!&ndash; End .product-title &ndash;&gt;
+                    <div class="product-price">
+                      Now $370.00
+                    </div>&lt;!&ndash; End .product-price &ndash;&gt;
+                  </div>&lt;!&ndash; End .product-body &ndash;&gt;
+                </div>&lt;!&ndash; End .product &ndash;&gt;
+              </div>&lt;!&ndash; End .col-sm-6 col-md-4 col-lg-3 &ndash;&gt;
+              <div class="col-6 col-md-4 col-lg-3">
+                <div class="product product-2">
+                  <figure class="product-media">
+                    <a href="product.html">
+                      <img src="/assets/images/demos/demo-5/products/product-11-1.jpg" alt="Product image" class="product-image">
+                      <img src="/assets/images/demos/demo-5/products/product-11-2.jpg" alt="Product image" class="product-image-hover">
+                    </a>
+
+                    <div class="product-action-vertical">
+                      <a href="#" class="btn-product-icon btn-wishlist" title="Add to wishlist"><span>add to wishlist</span></a>
+                    </div>&lt;!&ndash; End .product-action &ndash;&gt;
+
+                    <div class="product-action product-action-transparent">
+                      <a href="#" class="btn-product btn-cart"><span>add to cart</span></a>
+                    </div>&lt;!&ndash; End .product-action &ndash;&gt;
+                  </figure>&lt;!&ndash; End .product-media &ndash;&gt;
+
+                  <div class="product-body">
+                    <div class="product-cat">
+                      <a href="#">Clothing</a>
+                    </div>&lt;!&ndash; End .product-cat &ndash;&gt;
+                    <h3 class="product-title"><a href="product.html">Linen-blend jumpsuit</a></h3>&lt;!&ndash; End .product-title &ndash;&gt;
+                    <div class="product-price">
+                      $595.00
+                    </div>&lt;!&ndash; End .product-price &ndash;&gt;
+                  </div>&lt;!&ndash; End .product-body &ndash;&gt;
+                </div>&lt;!&ndash; End .product &ndash;&gt;
+              </div>&lt;!&ndash; End .col-sm-6 col-md-4 col-lg-3 &ndash;&gt;
+            </div>&lt;!&ndash; End .row &ndash;&gt;
+          </div>&lt;!&ndash; End .products &ndash;&gt;
+        </div>&lt;!&ndash; .End .tab-pane &ndash;&gt;
+        <div class="tab-pane p-0 fade" id="new-shoes-tab" role="tabpanel" aria-labelledby="new-shoes-link">
+          <div class="products">
+            <div class="row justify-content-center">
+              <div class="col-6 col-md-4 col-lg-3">
+                <div class="product product-2">
+                  <figure class="product-media">
+                    <a href="product.html">
+                      <img src="/assets/images/demos/demo-5/products/product-6-1.jpg" alt="Product image" class="product-image">
+                      <img src="/assets/images/demos/demo-5/products/product-6-2.jpg" alt="Product image" class="product-image-hover">
+                    </a>
+
+                    <div class="product-action-vertical">
+                      <a href="#" class="btn-product-icon btn-wishlist" title="Add to wishlist"><span>add to wishlist</span></a>
+                    </div>&lt;!&ndash; End .product-action &ndash;&gt;
+
+                    <div class="product-action product-action-transparent">
+                      <a href="#" class="btn-product btn-cart"><span>add to cart</span></a>
+                    </div>&lt;!&ndash; End .product-action &ndash;&gt;
+                  </figure>&lt;!&ndash; End .product-media &ndash;&gt;
+
+                  <div class="product-body">
+                    <div class="product-cat">
+                      <a href="#">Shoes</a>
+                    </div>&lt;!&ndash; End .product-cat &ndash;&gt;
+                    <h3 class="product-title"><a href="product.html">Sandals with lacing</a></h3>&lt;!&ndash; End .product-title &ndash;&gt;
+                    <div class="product-price">
+                      <span class="new-price">Now $70.00</span>
+                      <span class="old-price">Was $155.00</span>
+                    </div>&lt;!&ndash; End .product-price &ndash;&gt;
+                  </div>&lt;!&ndash; End .product-body &ndash;&gt;
+                </div>&lt;!&ndash; End .product &ndash;&gt;
+              </div>&lt;!&ndash; End .col-sm-6 col-md-4 col-lg-3 &ndash;&gt;
+              <div class="col-6 col-md-4 col-lg-3">
+                <div class="product product-2">
+                  <figure class="product-media">
+                    <a href="product.html">
+                      <img src="/assets/images/demos/demo-5/products/product-12-1.jpg" alt="Product image" class="product-image">
+                      <img src="/assets/images/demos/demo-5/products/product-12-2.jpg" alt="Product image" class="product-image-hover">
+                    </a>
+
+                    <div class="product-action-vertical">
+                      <a href="#" class="btn-product-icon btn-wishlist" title="Add to wishlist"><span>add to wishlist</span></a>
+                    </div>&lt;!&ndash; End .product-action &ndash;&gt;
+
+                    <div class="product-action product-action-transparent">
+                      <a href="#" class="btn-product btn-cart"><span>add to cart</span></a>
+                    </div>&lt;!&ndash; End .product-action &ndash;&gt;
+                  </figure>&lt;!&ndash; End .product-media &ndash;&gt;
+
+                  <div class="product-body">
+                    <div class="product-cat">
+                      <a href="#">Shoes</a>
+                    </div>&lt;!&ndash; End .product-cat &ndash;&gt;
+                    <h3 class="product-title"><a href="product.html">Sandals</a></h3>&lt;!&ndash; End .product-title &ndash;&gt;
+                    <div class="product-price">
+                      <span class="new-price">Now $120.00</span>
+                      <span class="old-price">Was $140.00</span>
+                    </div>&lt;!&ndash; End .product-price &ndash;&gt;
+                  </div>&lt;!&ndash; End .product-body &ndash;&gt;
+                </div>&lt;!&ndash; End .product &ndash;&gt;
+              </div>&lt;!&ndash; End .col-sm-6 col-md-4 col-lg-3 &ndash;&gt;
+            </div>&lt;!&ndash; End .row &ndash;&gt;
+          </div>&lt;!&ndash; End .products &ndash;&gt;
+        </div>&lt;!&ndash; .End .tab-pane &ndash;&gt;
+        <div class="tab-pane p-0 fade" id="new-access-tab" role="tabpanel" aria-labelledby="new-access-link">
+          <div class="products">
+            <div class="row justify-content-center">
+              <div class="col-6 col-md-4 col-lg-3">
+                <div class="product product-2">
+                  <figure class="product-media">
+                    <a href="product.html">
+                      <img src="/assets/images/demos/demo-5/products/product-8-1.jpg" alt="Product image" class="product-image">
+                      <img src="/assets/images/demos/demo-5/products/product-8-2.jpg" alt="Product image" class="product-image-hover">
+                    </a>
+
+                    <div class="product-action-vertical">
+                      <a href="#" class="btn-product-icon btn-wishlist" title="Add to wishlist"><span>add to wishlist</span></a>
+                    </div>&lt;!&ndash; End .product-action &ndash;&gt;
+
+                    <div class="product-action product-action-transparent">
+                      <a href="#" class="btn-product btn-cart"><span>add to cart</span></a>
+                    </div>&lt;!&ndash; End .product-action &ndash;&gt;
+                  </figure>&lt;!&ndash; End .product-media &ndash;&gt;
+
+                  <div class="product-body">
+                    <div class="product-cat">
+                      <a href="#">Handbags</a>
+                    </div>&lt;!&ndash; End .product-cat &ndash;&gt;
+                    <h3 class="product-title"><a href="product.html">Paper straw shopper</a></h3>&lt;!&ndash; End .product-title &ndash;&gt;
+                    <div class="product-price">
+                      $398.00
+                    </div>&lt;!&ndash; End .product-price &ndash;&gt;
+                  </div>&lt;!&ndash; End .product-body &ndash;&gt;
+                </div>&lt;!&ndash; End .product &ndash;&gt;
+              </div>&lt;!&ndash; End .col-sm-6 col-md-4 col-lg-3 &ndash;&gt;
+              <div class="col-6 col-md-4 col-lg-3">
+                <div class="product product-2">
+                  <figure class="product-media">
+                    <a href="product.html">
+                      <img src="/assets/images/demos/demo-5/products/product-9-1.jpg" alt="Product image" class="product-image">
+                      <img src="/assets/images/demos/demo-5/products/product-9-2.jpg" alt="Product image" class="product-image-hover">
+                    </a>
+
+                    <div class="product-action-vertical">
+                      <a href="#" class="btn-product-icon btn-wishlist" title="Add to wishlist"><span>add to wishlist</span></a>
+                    </div>&lt;!&ndash; End .product-action &ndash;&gt;
+
+                    <div class="product-action product-action-transparent">
+                      <a href="#" class="btn-product btn-cart"><span>add to cart</span></a>
+                    </div>&lt;!&ndash; End .product-action &ndash;&gt;
+                  </figure>&lt;!&ndash; End .product-media &ndash;&gt;
+
+                  <div class="product-body">
+                    <div class="product-cat">
+                      <a href="#">Handbags</a>
+                    </div>&lt;!&ndash; End .product-cat &ndash;&gt;
+                    <h3 class="product-title"><a href="product.html">Bucket bag</a></h3>&lt;!&ndash; End .product-title &ndash;&gt;
+                    <div class="product-price">
+                      $350.00
+                    </div>&lt;!&ndash; End .product-price &ndash;&gt;
+                    <div class="product-nav product-nav-dots">
+                      <a href="#" class="active" style="background: #e3a84d;"><span class="sr-only">Color name</span></a>
+                      <a href="#" style="background: #f48a5b;"><span class="sr-only">Color name</span></a>
+                      <a href="#" style="background: #333333;"><span class="sr-only">Color name</span></a>
+                    </div>&lt;!&ndash; End .product-nav &ndash;&gt;
+                  </div>&lt;!&ndash; End .product-body &ndash;&gt;
+                </div>&lt;!&ndash; End .product &ndash;&gt;
+              </div>&lt;!&ndash; End .col-sm-6 col-md-4 col-lg-3 &ndash;&gt;
+            </div>&lt;!&ndash; End .row &ndash;&gt;
+          </div>&lt;!&ndash; End .products &ndash;&gt;
+        </div>&lt;!&ndash; .End .tab-pane &ndash;&gt;-->
+      </div><!-- End .tab-content -->
+
+      <div class="more-container text-center mt-1 mb-3">
+        <a href="shop/category-list" class="btn btn-outline-primary-2 btn-round btn-more">Load more</a>
+      </div><!-- End .more-container -->
+    </div><!-- End .container -->
+
+    <div class="mb-2"></div><!-- End .mb-2 -->
+
+
+  </main><!-- End .main -->
+
+  <footer class="footer footer-2">
+
+
+    <div class="footer-bottom">
+      <div class="container">
+        <p class="footer-copyright">Developped By Amadou.diadie04@gmail.com</p><!-- End .footer-copyright -->
+        <!--<ul class="footer-menu">
+          <li><a href="#">Terms Of Use</a></li>
+          <li><a href="#">Privacy Policy</a></li>
+        </ul>&lt;!&ndash; End .footer-menu &ndash;&gt;-->
+        <div class="social-icons social-icons-color">
+          <span class="social-label">Badalabougou Rue 36 - Porte 62 / <a href="tel:+223 76 49 82 56">+223 76 49 82 56</a> </span>
+          <a href="https://www.facebook.com/mimipedro.kouyate" class="social-icon social-facebook" title="Facebook" target="_blank"><i class="icon-facebook-f"></i></a>
+          <a href="https://wa.me/22376498256" class="social-icon social-whatsapp" title="Whatsapp" target="_blank"><i class="icon-whatsapp"></i></a>
+          <!--          <a href="#" class="social-icon social-twitter" title="Twitter" target="_blank"><i class="icon-twitter"></i></a>
+                    <a href="#" class="social-icon social-instagram" title="Instagram" target="_blank"><i class="icon-instagram"></i></a>
+                    <a href="#" class="social-icon social-youtube" title="Youtube" target="_blank"><i class="icon-youtube"></i></a>
+                    <a href="#" class="social-icon social-pinterest" title="Pinterest" target="_blank"><i class="icon-pinterest"></i></a>-->
+        </div><!-- End .soial-icons -->
+      </div><!-- End .container -->
+    </div><!-- End .footer-bottom -->
+  </footer><!-- End .footer -->
+</div><!-- End .page-wrapper -->
+<button id="scroll-top" title="Back to Top"><i class="icon-arrow-up"></i></button>
+
+<!-- Mobile Menu -->
+<div class="mobile-menu-overlay"></div><!-- End .mobil-menu-overlay -->
+
+<div class="mobile-menu-container mobile-menu-light">
+  <div class="mobile-menu-wrapper">
+    <span class="mobile-menu-close"><i class="icon-close"></i></span>
+
+    <form (submit)="redirectOnProductList('ByNameContains', 'name', productSearchKey)" class="mobile-search">
+      <label for="mobile-search" class="sr-only">Search</label>
+      <input type="search" class="form-control" name="mobile-search" id="mobile-search" placeholder="Rechercher un produit ..." [(ngModel)]="productSearchKey" required>
+      <button class="btn btn-primary" type="submit"><i class="icon-search"></i></button>
+    </form>
+
+    <nav class="mobile-nav">
+      <ul class="mobile-menu">
+        <li class="active">
+          <a href="home">Home</a>
+        </li>
+        <li>
+          <a href="shop/product-list">Produits</a>
+<!--          <ul>
+            <li style="cursor: pointer" *ngFor="let category of allCategories"><a (click)="redirectOnProductList('ByCategoryName','categoryName', category.name)">{{category.name}}</a></li>
+          </ul>-->
+        </li>
+        <li>
+          <a href="shop/category-list">Categories</a>
+        </li>
+        <li>
+          <a href="shop/about">About</a>
+        </li>
+        <li>
+          <a href="shop/contact">Contact</a>
+        </li>
+        <li *ngIf="isAuthenticated">
+          <a class="sf-with-ul">Admin</a>
+          <ul>
+            <li><a href="#image-modal" data-toggle="modal" (click)="onChangeImage('header-caroussel-1')">Changer la Banière 1</a></li>
+            <li><a href="#image-modal" data-toggle="modal" (click)="onChangeImage('header-caroussel-2')">Changer la Banière 2</a></li>
+            <li><a href="#image-modal" data-toggle="modal" (click)="onChangeImage('middle-banner-1')">Changer la Banière du Milieu</a></li>
+            <li><a href="#product-modal" data-toggle="modal" (click)="onProductModalOpen()" >Ajouter un Produit</a></li>
+            <li><a href="#category-modal" data-toggle="modal" >Ajouter une Categorie</a></li>
+            <li><a href="shop/command-list" >Liste des Commandes</a></li>
+            <li><a style="cursor:pointer;" (click)="Logout()">Se Deconnecter</a></li>
+          </ul>
+        </li>
+      </ul>
+    </nav><!-- End .mobile-nav -->
+
+    <div class="social-icons">
+      <a href="https://www.facebook.com/mimipedro.kouyate" class="social-icon" target="_blank" title="Facebook"><i class="icon-facebook-f"></i></a>
+      <a href="https://wa.me/22376498256" class="social-icon social-whatsapp" title="Whatsapp" target="_blank"><i class="icon-whatsapp"></i></a>
+<!--      <a href="#" class="social-icon" target="_blank" title="Instagram"><i class="icon-instagram"></i></a>
+      <a href="#" class="social-icon" target="_blank" title="Youtube"><i class="icon-youtube"></i></a>-->
+    </div><!-- End .social-icons -->
+  </div><!-- End .mobile-menu-wrapper -->
+</div><!-- End .mobile-menu-container -->
+
+<!-- Product Modal -->
+<div class="modal fade" id="product-modal" tabindex="-1" role="dialog" aria-hidden="true">
+  <div class="modal-dialog modal-dialog-centered" role="document">
+    <div class="modal-content">
+      <div class="modal-header text-center">
+        <h4 class="modal-title">Ajouter/Modifier un produit</h4>
+        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+          <span aria-hidden="true"><i class="icon-close"></i></span>
+        </button>
+      </div>
+      <div class="modal-body">
+        <div class="form-box">
+          <div class="container-fluid">
+            <form *ngIf="!closeModal" style="margin-left: -10%; margin-right: -10%" (submit)="testAndSaveProduct()">
+              <div *ngIf="productFormMode == 'detail'" >
+              <div class="form-row col-md-12">
+                <div class="col">
+                  <label>Image du Produit :</label>
+                  <img *ngIf=dbImage [src]="dbImage" class="mb-1">
+                  <div class="custom-file">
+                    <input type="file" name="image" class="custom-file-input" (change)="onImageUpload($event)" >
+                    <label class="custom-file-label">Choose file</label>
+                  </div>
+                </div>
+                <div class="col ml-auto">
+                  <div class="form-group">
+                    <label >Nom du Produit :</label>
+                    <input type="text" name="name" class="form-control" [(ngModel)]="newProduct.name">
+                  </div>
+                  <div class="form-group">
+                    <label>Description:</label>
+                    <textarea type="text" name="description" class="form-control" [(ngModel)]="newProduct.description"> </textarea>
+                  </div>
+                </div>
+              </div>
+
+              <div class="form-row">
+                <div class="form-group col-md-6">
+                  <label>Prix (En Fcfa) :</label>
+                  <input type="number" name="price" class="form-control" [(ngModel)]="newProduct.price">
+                </div>
+                <div class="form-group col-md-6">
+                  <label>Quantité :</label>
+                  <input type="number" name="quantity" class="form-control" [(ngModel)]="newProduct.quantity">
+                </div>
+              </div>
+              <div class="form-group">
+                <label >Categorie :</label>
+                <select class="form-control custom-select" name="categoryName" [(ngModel)]="newProduct.categoryName">
+                  <option *ngFor = "let category of allCategories" [value]="category.name" >{{category.name}}</option>
+                </select>
+              </div>
+              <div class="form-group">
+                <label >Couleurs disponibles</label>
+                <input type="text" class="form-control" placeholder="Noir ,Blanc, Rouge..." name="colors" [(ngModel)]="newProduct.colorsAvailaibles">
+              </div>
+              <div class="form-group">
+                <label >Tailles disponibles</label>
+                <input type="text" class="form-control" placeholder="XS ,X, XL..." name="size" [(ngModel)]="newProduct.sizesAvailaibles">
+              </div>
+              <div class="form-row ml-1 mb-2">
+                <div class="col custom-control custom-checkbox">
+                  <input type="checkbox" class="custom-control-input" id="customCheck1" name="isNew" [(ngModel)]="newProduct.newProduct">
+                  <label class="custom-control-label" for="customCheck1" style="margin-left: 1px">Nouveauté</label>
+                </div>
+                <div class="col custom-control custom-checkbox">
+                  <input type="checkbox" class="custom-control-input" id="customCheck2" name="isPopular" [(ngModel)]="newProduct.populary">
+                  <label class="custom-control-label" for="customCheck2" style="margin-left: 1px">Populaire</label>
+                </div>
+              </div>
+              <button type="button" data-dismiss="modal" aria-label="Close" class="btn btn-info" > Fermer </button>
+              <button *ngIf="newProduct.id" (click)="DeleteProduct(newProduct)" type="button" class="btn btn-danger ml-3"> Supprimer</button>
+              <button type="button" class="btn btn-success ml-3" (click)="productFormMode = 'image'" > Suivant </button>
+              </div> <!-- Fin ProductFormMode = detail -->
+              <div *ngIf="productFormMode == 'image'" >
+
+                <div class="form-row col-md-12 mb-2">
+                  <div class="col">
+                    <label>Image 2 du Produit :</label>
+                    <img *ngIf=newProduct.image2 [src]="newProduct.image2" class="mb-1">
+                    <div class="custom-file">
+                      <input type="file" name="image2" class="custom-file-input" (change)="onProductImage2345Upload($event,2)" >
+                      <label class="custom-file-label">Choose file</label>
+                    </div>
+                  </div>
+                  <div class="col">
+                    <label>Image 3 du Produit :</label>
+                    <img *ngIf=newProduct.image3 [src]="newProduct.image3" class="mb-1">
+                    <div class="custom-file">
+                      <input type="file" name="image3" class="custom-file-input" (change)="onProductImage2345Upload($event,3)" >
+                      <label class="custom-file-label">Choose file</label>
+                    </div>
+                  </div>
+                </div>
+
+                <div class="form-row col-md-12 mb-2">
+                  <div class="col">
+                    <label>Image 4 du Produit :</label>
+                    <img *ngIf=newProduct.image4 [src]="newProduct.image4" class="mb-1">
+                    <div class="custom-file">
+                      <input type="file" name="image4" class="custom-file-input" (change)="onProductImage2345Upload($event,4)" >
+                      <label class="custom-file-label">Choose file</label>
+                    </div>
+                  </div>
+                  <div class="col">
+                    <label>Image 5 du Produit :</label>
+                    <img *ngIf=newProduct.image5 [src]="newProduct.image5" class="mb-1">
+                    <div class="custom-file">
+                      <input type="file" name="image5" class="custom-file-input" (change)="onProductImage2345Upload($event,5)" >
+                      <label class="custom-file-label">Choose file</label>
+                    </div>
+                  </div>
+                </div>
+
+                <button type="button" (click)="productFormMode = 'detail'"class="btn btn-info" > Précédant </button>
+                <button type="submit" class="btn btn-success ml-3" > Valider </button>
+              </div>
+            </form>
+            <div *ngIf="closeModal" class="modal-footer">
+              <button (click)="onCloseModal()" type="button" data-dismiss="modal" aria-label="Close" class="btn btn-info" > Fermer </button>
+            </div>
+          </div>
+          <!--<form>
+            <div class="form-group">
+              <input type="file" (change)="onImageUpload($event)">
+              <input type="button" (click)="imageUploadAction()" value="Upload Image" class="btn1">
+            </div>
+
+
+            <div>
+              <output *ngIf=successResponse class="success"><b>{{successResponse}}</b></output>
+            </div>
+            <br>
+
+            <div class="form-group">
+              <input type="text" id="image" placeholder="Search Image" [(ngModel)]="image" name="image" />
+              <input type="button" (click)="viewImage()" value="View Image" class="btn1">
+
+            </div>
+
+            <div *ngIf=dbImage>
+              <img [src]="dbImage">
+            </div>
+
+          </form>-->
+
+        </div><!-- End .form-box -->
+
+      </div><!-- End .modal-body -->
+    </div><!-- End .modal-content -->
+  </div><!-- End .modal-dialog -->
+</div><!-- End .modal -->
+
+<!-- Category Modal -->
+<div class="modal fade" id="category-modal" tabindex="-1" role="dialog" aria-hidden="true">
+  <div class="modal-dialog modal-dialog-centered" role="document">
+    <div class="modal-content">
+      <div class="modal-header text-center">
+        <h4 class="modal-title">Ajouter une nouvelle categorie</h4>
+        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+          <span aria-hidden="true"><i class="icon-close"></i></span>
+        </button>
+      </div>
+      <div class="modal-body">
+        <div class="form-box">
+          <div class="container-fluid">
+            <form *ngIf="!closeModal" class="form" style="margin-left: -10%; margin-right: -10%" (submit)="testAndSaveCategory()">
+              <div class="form-row col-md-12">
+                <div class="col">
+                  <label>Image de la Categorie :</label>
+                  <img *ngIf=newCategory.image [src]="newCategory.image" class="mb-1">
+                  <div class="custom-file">
+                    <input type="file" name="image" class="custom-file-input" (change)="onProductImage2345Upload($event, 6)" >
+                    <label class="custom-file-label">Choose file</label>
+                  </div>
+                </div>
+                <div class="col ml-auto">
+                  <div class="form-group">
+                    <label>Nom :</label>
+                    <input type="text" name="name" class="form-control" [(ngModel)]="newCategory.name">
+                  </div>
+                  <div class="form-group">
+                    <label>Description :</label>
+                    <textarea name="description" class="form-control" [(ngModel)]="newCategory.description"></textarea>
+                  </div>
+                </div>
+              </div>
+
+              <button type="button" data-dismiss="modal" aria-label="Close" class="btn btn-info" > Fermer </button>
+              <button type="submit" class="btn btn-success ml-3" > Valider </button>
+            </form>
+            <div *ngIf="closeModal" class="modal-footer">
+            <button (click)="onCloseModal()" type="button" data-dismiss="modal" aria-label="Close" class="btn btn-info" > Fermer </button>
+          </div>
+          </div>
+        </div><!-- End .form-box -->
+
+      </div><!-- End .modal-body -->
+    </div><!-- End .modal-content -->
+  </div><!-- End .modal-dialog -->
+</div><!-- End .modal -->
+
+<!-- Category Modal -->
+<div class="modal fade" id="promo-modal" tabindex="-1" role="dialog" aria-hidden="true">
+  <div class="modal-dialog modal-dialog-centered" role="document">
+    <div class="modal-content">
+      <div class="modal-header text-center">
+        <h4 class="modal-title">Produit de la Promotion</h4>
+        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+          <span aria-hidden="true"><i class="icon-close"></i></span>
+        </button>
+      </div>
+      <div class="modal-body">
+        <div class="form-box">
+          <div class="container-fluid">
+            <form class="form mb-3" style="margin-left: -20%; margin-right: -20%" (submit)="getPromoProduct()">
+
+                  <div class="form-group">
+                    <label>Nom du Produit :</label>
+                    <input type="text" name="promoSearchKey" class="form-control" [(ngModel)]="promoSearchKey">
+                  </div>
+
+              <button type="button" data-dismiss="modal" aria-label="Close" class="btn btn-info" > Fermer </button>
+              <button type="submit" class="btn btn-success ml-3" > Recherche </button>
+            </form>
+
+            <ng-container *ngIf="(promoProductSearch$ | async ) as result" [ngSwitch]="result.dataState" >
+              <ng-container *ngSwitchCase="DataStateEnum2.LOADING">
+                Loading .....
+              </ng-container>
+              <ng-container *ngSwitchCase="DataStateEnum2.ERROR">
+                <div class="alert-danger">
+                  {{result.errorMessage}}
+                </div>
+              </ng-container>
+              <ng-container *ngSwitchCase="DataStateEnum2.LOADED">
+
+                <div class="tab-content">
+                  <div class="tab-pane p-0 fade show active" aria-labelledby="new-all-link">
+                    <div class="products">
+                      <div class="row justify-content-center">
+
+
+                          <div class="product product-2">
+                            <figure class="product-media">
+                              <a>
+                                <img [src]="result.data.image" alt="Product image" class="product-image">
+                                <img [src]="result.data.image2" alt="Product image" class="product-image-hover">
+                              </a>
+
+
+                              <div class="product-action product-action-transparent">
+                                <a data-dismiss="modal" aria-label="Close" style="cursor:pointer;" (click)="affectPromoProduct(result.data)" class="btn-product btn-cart"><span>Selectionner</span></a>
+                              </div><!-- End .product-action -->
+                            </figure><!-- End .product-media -->
+
+                            <div class="product-body">
+                              <div class="product-cat">
+                                <a>{{result.data.categoryName}}</a>
+                              </div><!-- End .product-cat -->
+                              <h3 class="product-title"><a style="cursor:pointer;" (click)="affectPromoProduct(result.data)">{{result.data.name}}</a></h3><!-- End .product-title -->
+                              <div class="product-price">
+                                {{result.data.price}} Fcfa
+                              </div><!-- End .product-price -->
+                            </div><!-- End .product-body -->
+                          </div><!-- End .product -->
+
+
+                      </div><!-- End .row -->
+                    </div><!-- End .products -->
+                  </div><!-- .End .tab-pane -->
+                </div>
+
+              </ng-container>
+            </ng-container>
+
+          </div>
+        </div><!-- End .form-box -->
+
+      </div><!-- End .modal-body -->
+    </div><!-- End .modal-content -->
+  </div><!-- End .modal-dialog -->
+</div><!-- End .modal -->
+
+
+<!-- Image Modal -->
+<div class="modal fade" id="image-modal" tabindex="-1" role="dialog" aria-hidden="true">
+  <div class="modal-dialog modal-dialog-centered" role="document">
+    <div class="modal-content">
+      <div class="modal-header text-center">
+        <h4 class="modal-title">Changer la Banière</h4>
+        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+          <span aria-hidden="true"><i class="icon-close"></i></span>
+        </button>
+      </div>
+      <div class="modal-body">
+        <div class="form-box">
+          <div class="container-fluid">
+            <ng-container *ngIf="(imageToChange$ | async ) as result" [ngSwitch]="result.dataState" >
+              <ng-container *ngSwitchCase="DataStateEnum.LOADING">
+                Loading .....
+              </ng-container>
+              <ng-container *ngSwitchCase="DataStateEnum.ERROR">
+                <div class="alert-danger">
+                  {{result.errorMessage}}
+                </div>
+                <div class="modal-footer">
+                  <button (click)="onCloseModal()" type="button" data-dismiss="modal" aria-label="Close" class="btn btn-info" > Fermer </button>
+                </div>
+              </ng-container>
+              <ng-container *ngSwitchCase="DataStateEnum.LOADED">
+                <form *ngIf="!closeModal" style="margin-left: -10%; margin-right: -10%" (submit)="testAndSaveImage(result.data)">
+                  <div class="form-row col-md-12">
+                    <div class="col">
+                      <label>Image :</label>
+                      <img *ngIf=dbImage [src]="dbImage" class="mb-1">
+                      <div class="custom-file">
+                        <input type="file" name="image" class="custom-file-input" (change)="dbImage = onImageUpload($event)" >
+                        <label class="custom-file-label">Choose file</label>
+                      </div>
+                    </div>
+                    <div class="col ml-auto">
+                      <div class="form-group">
+                        <label >Titre :</label>
+                        <input type="text" name="name" class="form-control" [(ngModel)]="result.data.title">
+                      </div>
+                      <div class="form-group">
+                        <label>Description:</label>
+                        <textarea type="text" name="description" class="form-control" [(ngModel)]="result.data.description"> </textarea>
+                      </div>
+                    </div>
+                  </div>
+                  <button type="button" data-dismiss="modal" aria-label="Close" class="btn btn-info" > Fermer </button>
+                  <button type="submit" class="btn btn-success ml-3" > Valider </button>
+                </form>
+                <div *ngIf="closeModal" class="modal-footer">
+                  <button (click)="onCloseModal()" type="button" data-dismiss="modal" aria-label="Close" class="btn btn-info" > Fermer </button>
+                </div>
+              </ng-container>
+            </ng-container>
+          </div>
+
+        </div><!-- End .form-box -->
+
+      </div><!-- End .modal-body -->
+    </div><!-- End .modal-content -->
+  </div><!-- End .modal-dialog -->
+</div><!-- End .modal -->
+
+
+<!--<div class="container newsletter-popup-container mfp-hide" id="newsletter-popup-form">
+  <div class="row justify-content-center">
+    <div class="col-10">
+      <div class="row no-gutters bg-white newsletter-popup-content">
+        <div class="col-xl-3-5col col-lg-7 banner-content-wrap">
+          <div class="banner-content text-center">
+            <img src="/assets/images/popup/newsletter/logo.png" class="logo" alt="logo" width="60" height="15">
+            <h2 class="banner-title">get <span>25%</span> off</h2>
+            <p>Subscribe to the Molla eCommerce newsletter to receive timely updates from your favorite products.</p>
+            <form action="#">
+              <div class="input-group input-group-round">
+                <input type="email" class="form-control form-control-white" placeholder="Your Email Address" aria-label="Email Adress" required>
+                <div class="input-group-append">
+                  <button class="btn" type="submit"><span>go</span></button>
+                </div>&lt;!&ndash; .End .input-group-append &ndash;&gt;
+              </div>&lt;!&ndash; .End .input-group &ndash;&gt;
+            </form>
+            <div class="custom-control custom-checkbox">
+              <input type="checkbox" class="custom-control-input" id="register-policy-2" required>
+              <label class="custom-control-label" for="register-policy-2">Do not show this popup again</label>
+            </div>&lt;!&ndash; End .custom-checkbox &ndash;&gt;
+          </div>
+        </div>
+        <div class="col-xl-2-5col col-lg-5 ">
+          <img src="/assets/images/popup/newsletter/img-1.jpg" class="newsletter-img" alt="newsletter">
+        </div>
+      </div>
+    </div>
+  </div>
+</div>-->
+<!-- Plugins JS File
+<script src="/assets/js/jquery.min.js"></script>
+<script src="/assets/js/bootstrap.bundle.min.js"></script>
+<script src="/assets/js/jquery.hoverIntent.min.js"></script>
+<script src="/assets/js/jquery.waypoints.min.js"></script>
+<script src="/assets/js/superfish.min.js"></script>
+<script src="/assets/js/owl.carousel.min.js"></script>
+<script src="/assets/js/jquery.magnific-popup.min.js"></script>
+<script src="/assets/js/jquery.plugin.min.js"></script>
+<script src="/assets/js/jquery.countdown.min.js"></script>
+
+&lt;!&ndash; Main JS File &ndash;&gt;
+<script src="/assets/js/main.js"></script>
+<script src="/assets/js/demos/demo-5.js"></script>-->
+<!-- Sign in / Register Modal -->
+
+</body>
+
+
+<!-- molla/index-5.html  22 Nov 2019 09:56:18 GMT -->
+</html>

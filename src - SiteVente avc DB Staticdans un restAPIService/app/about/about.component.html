@@ -1,0 +1,279 @@
+<main class="main">
+  <nav aria-label="breadcrumb" class="breadcrumb-nav border-0 mb-0">
+    <div class="container">
+      <ol class="breadcrumb">
+        <li class="breadcrumb-item"><a href="index.html">Home</a></li>
+        <li class="breadcrumb-item"><a href="#">Pages</a></li>
+        <li class="breadcrumb-item active" aria-current="page">Qui Somme-Nous ?</li>
+      </ol>
+    </div><!-- End .container -->
+  </nav><!-- End .breadcrumb-nav -->
+  <div class="container">
+    <a *ngIf="isAuthenticated" href="#image-modal" data-toggle="modal" (click)="onChangeImage('about-banner')" class="page-header page-header-big text-center" [style]="'background-image: url('+banner.image+')'">
+      <h1 class="page-title text-white">{{banner.title}}<span class="text-white">{{banner.description}}</span></h1>
+    </a><!-- End .page-header -->
+    <a *ngIf="!isAuthenticated" class="page-header page-header-big text-center" [style]="'background-image: url('+banner.image+')'">
+      <h1 class="page-title text-white">{{banner.title}}<span class="text-white">{{banner.description}}</span></h1>
+    </a><!-- End .page-header -->
+  </div><!-- End .container -->
+
+  <div class="page-content pb-0">
+
+    <div class="bg-light-2 pt-6 pb-5 mb-6 mb-lg-8">
+      <div class="container">
+        <div class="row">
+          <div class="col-lg-5 mb-3 mb-lg-0">
+            <p class="lead text-primary mb-3"></p><!-- End .lead text-primary -->
+            <h2 class="title">{{bannerWWA.title}}</h2><!-- End .title -->
+            <br>
+            <p class="mb-2">{{bannerWWA.description}}</p>
+            <br>
+            <a *ngIf="isAuthenticated"  href="#image-modal" data-toggle="modal" (click)="onChangeImage('who-we-are-banner')" class="btn btn-sm btn-minwidth btn-outline-primary-2">
+              <span>Modifier</span>
+              <i class="icon-long-arrow-right"></i>
+            </a>
+          </div><!-- End .col-lg-5 -->
+
+          <div class="col-lg-6 offset-lg-1">
+            <div class="about-images">
+              <img [src]="bannerWWA.image" alt="" class="about-img-front">
+            </div><!-- End .about-images -->
+          </div><!-- End .col-lg-6 -->
+        </div><!-- End .row -->
+      </div><!-- End .container -->
+    </div><!-- End .bg-light-2 pt-6 pb-6 -->
+
+    <div class="container">
+      <!--<div class="row">
+        <div class="col-lg-5">
+          <div class="brands-text">
+            <h2 class="title">The world's premium design brands in one destination.</h2>&lt;!&ndash; End .title &ndash;&gt;
+            <p>Phasellus hendrerit. Pellentesque aliquet nibh nec urna. In nisi neque, aliquet vel, dapibus id, mattis vel, nis</p>
+          </div>&lt;!&ndash; End .brands-text &ndash;&gt;
+        </div>&lt;!&ndash; End .col-lg-5 &ndash;&gt;
+        <div class="col-lg-7">
+          <div class="brands-display">
+            <div class="row justify-content-center">
+              <div class="col-6 col-sm-4">
+                <a href="#" class="brand">
+                  <img src="assets/images/brands/1.png" alt="Brand Name">
+                </a>
+              </div>&lt;!&ndash; End .col-sm-4 &ndash;&gt;
+
+              <div class="col-6 col-sm-4">
+                <a href="#" class="brand">
+                  <img src="assets/images/brands/2.png" alt="Brand Name">
+                </a>
+              </div>&lt;!&ndash; End .col-sm-4 &ndash;&gt;
+
+              <div class="col-6 col-sm-4">
+                <a href="#" class="brand">
+                  <img src="assets/images/brands/3.png" alt="Brand Name">
+                </a>
+              </div>&lt;!&ndash; End .col-sm-4 &ndash;&gt;
+
+              <div class="col-6 col-sm-4">
+                <a href="#" class="brand">
+                  <img src="assets/images/brands/4.png" alt="Brand Name">
+                </a>
+              </div>&lt;!&ndash; End .col-sm-4 &ndash;&gt;
+
+              <div class="col-6 col-sm-4">
+                <a href="#" class="brand">
+                  <img src="assets/images/brands/5.png" alt="Brand Name">
+                </a>
+              </div>&lt;!&ndash; End .col-sm-4 &ndash;&gt;
+
+              <div class="col-6 col-sm-4">
+                <a href="#" class="brand">
+                  <img src="assets/images/brands/6.png" alt="Brand Name">
+                </a>
+              </div>&lt;!&ndash; End .col-sm-4 &ndash;&gt;
+
+              <div class="col-6 col-sm-4">
+                <a href="#" class="brand">
+                  <img src="assets/images/brands/7.png" alt="Brand Name">
+                </a>
+              </div>&lt;!&ndash; End .col-sm-4 &ndash;&gt;
+
+              <div class="col-6 col-sm-4">
+                <a href="#" class="brand">
+                  <img src="assets/images/brands/8.png" alt="Brand Name">
+                </a>
+              </div>&lt;!&ndash; End .col-sm-4 &ndash;&gt;
+
+              <div class="col-6 col-sm-4">
+                <a href="#" class="brand">
+                  <img src="assets/images/brands/9.png" alt="Brand Name">
+                </a>
+              </div>&lt;!&ndash; End .col-sm-4 &ndash;&gt;
+            </div>&lt;!&ndash; End .row &ndash;&gt;
+          </div>&lt;!&ndash; End .brands-display &ndash;&gt;
+        </div>&lt;!&ndash; End .col-lg-7 &ndash;&gt;
+      </div>&lt;!&ndash; End .row &ndash;&gt;-->
+
+      <hr class="mt-4 mb-6">
+
+      <h2 class="title text-center mb-4">Notre Equipe</h2><!-- End .title text-center mb-2 -->
+
+      <div class="row">
+        <div class="col-md-4">
+          <div class="member member-anim text-center">
+            <figure class="member-media">
+              <img [src]="bannerTeam1.image" alt="member photo">
+
+              <figcaption class="member-overlay">
+                <a *ngIf="isAuthenticated"  style="color: white" href="#image-modal" data-toggle="modal" (click)="onChangeImage('team-1-banner')">
+                <div class="member-overlay-content">
+                  <h3 class="member-title">
+                    {{bannerTeam1.title}}<span>{{bannerTeam1.description}}</span>
+                  </h3><!-- End .member-title -->
+                </div><!-- End .member-overlay-content -->
+                </a>
+                <a *ngIf="!isAuthenticated"  style="color: white">
+                  <div class="member-overlay-content">
+                    <h3 class="member-title">
+                      {{bannerTeam1.title}}<span>{{bannerTeam1.description}}</span>
+                    </h3><!-- End .member-title -->
+                  </div><!-- End .member-overlay-content -->
+                </a>
+              </figcaption><!-- End .member-overlay -->
+            </figure><!-- End .member-media -->
+            <div class="member-content">
+              <h3 class="member-title">
+                {{bannerTeam1.title}}<span>{{bannerTeam1.description}}</span>
+              </h3><!-- End .member-title -->
+            </div><!-- End .member-content -->
+          </div><!-- End .member -->
+        </div><!-- End .col-md-4 -->
+
+        <div class="col-md-4">
+          <div class="member member-anim text-center">
+            <figure class="member-media">
+              <img [src]="bannerTeam2.image" alt="member photo">
+
+              <figcaption class="member-overlay">
+                <a *ngIf="isAuthenticated" style="color: white" href="#image-modal" data-toggle="modal" (click)="onChangeImage('team-2-banner')">
+                  <div class="member-overlay-content">
+                    <h3 class="member-title">
+                      {{bannerTeam2.title}}<span>{{bannerTeam2.description}}</span>
+                    </h3><!-- End .member-title -->
+                  </div><!-- End .member-overlay-content -->
+                </a>
+                <a *ngIf="!isAuthenticated" style="color: white">
+                  <div class="member-overlay-content">
+                    <h3 class="member-title">
+                      {{bannerTeam2.title}}<span>{{bannerTeam2.description}}</span>
+                    </h3><!-- End .member-title -->
+                  </div><!-- End .member-overlay-content -->
+                </a>
+              </figcaption><!-- End .member-overlay -->
+            </figure><!-- End .member-media -->
+            <div class="member-content">
+              <h3 class="member-title">
+                {{bannerTeam2.title}}<span>{{bannerTeam2.description}}</span>
+              </h3>
+            </div><!-- End .member-content -->
+          </div><!-- End .member -->
+        </div><!-- End .col-md-4 -->
+
+        <div class="col-md-4">
+          <div class="member member-anim text-center">
+            <figure class="member-media">
+              <img [src]="bannerTeam3.image" alt="member photo">
+
+              <figcaption class="member-overlay">
+                <a *ngIf="isAuthenticated" style="color: white" href="#image-modal" data-toggle="modal" (click)="onChangeImage('team-3-banner')">
+                  <div class="member-overlay-content">
+                    <h3 class="member-title">
+                      {{bannerTeam3.title}}<span>{{bannerTeam3.description}}</span>
+                    </h3><!-- End .member-title -->
+                  </div><!-- End .member-overlay-content -->
+                </a>
+                <a *ngIf="!isAuthenticated" style="color: white">
+                  <div class="member-overlay-content">
+                    <h3 class="member-title">
+                      {{bannerTeam3.title}}<span>{{bannerTeam3.description}}</span>
+                    </h3><!-- End .member-title -->
+                  </div><!-- End .member-overlay-content -->
+                </a>
+              </figcaption><!-- End .member-overlay -->
+            </figure><!-- End .member-media -->
+            <div class="member-content">
+              <h3 class="member-title">
+                {{bannerTeam3.title}}<span>{{bannerTeam3.description}}</span>
+              </h3><!-- End .member-title -->
+            </div><!-- End .member-content -->
+          </div><!-- End .member -->
+        </div><!-- End .col-md-4 -->
+      </div><!-- End .row -->
+    </div><!-- End .container -->
+
+    <div class="mb-2"></div><!-- End .mb-2 -->
+
+  </div><!-- End .page-content -->
+</main><!-- End .main -->
+
+<!-- Image Modal -->
+<div class="modal fade" id="image-modal" tabindex="-1" role="dialog" aria-hidden="true">
+  <div class="modal-dialog modal-dialog-centered" role="document">
+    <div class="modal-content">
+      <div class="modal-header text-center">
+        <h4 class="modal-title">Changer la Banière</h4>
+        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+          <span aria-hidden="true"><i class="icon-close"></i></span>
+        </button>
+      </div>
+      <div class="modal-body">
+        <div class="form-box">
+          <div class="container-fluid">
+            <ng-container *ngIf="(imageToChange$ | async ) as result" [ngSwitch]="result.dataState" >
+              <ng-container *ngSwitchCase="DataStateEnum.LOADING">
+                Loading .....
+              </ng-container>
+              <ng-container *ngSwitchCase="DataStateEnum.ERROR">
+                <div class="alert-danger">
+                  {{result.errorMessage}}
+                </div>
+                <div class="modal-footer">
+                  <button (click)="onCloseModal()" type="button" data-dismiss="modal" aria-label="Close" class="btn btn-info" > Fermer </button>
+                </div>
+              </ng-container>
+              <ng-container *ngSwitchCase="DataStateEnum.LOADED">
+                <form *ngIf="!closeModal" style="margin-left: -10%; margin-right: -10%" (submit)="testAndSaveImage(result.data)">
+                  <div class="form-row col-md-12">
+                    <div class="col">
+                      <label>Image :</label>
+                      <img *ngIf=dbImage [src]="dbImage" class="mb-1">
+                      <div class="custom-file">
+                        <input type="file" name="image" class="custom-file-input" (change)="onImageUpload($event)" >
+                        <label class="custom-file-label">Choose file</label>
+                      </div>
+                    </div>
+                    <div class="col ml-auto">
+                      <div class="form-group">
+                        <label >Titre :</label>
+                        <input type="text" name="name" class="form-control" [(ngModel)]="result.data.title">
+                      </div>
+                      <div class="form-group">
+                        <label>Description:</label>
+                        <textarea type="text" name="description" class="form-control" [(ngModel)]="result.data.description"> </textarea>
+                      </div>
+                    </div>
+                  </div>
+                  <button type="button" data-dismiss="modal" aria-label="Close" class="btn btn-info" > Fermer </button>
+                  <button type="submit" class="btn btn-success ml-3" > Valider </button>
+                </form>
+                <div *ngIf="closeModal" class="modal-footer">
+                  <button (click)="onCloseModal()" type="button" data-dismiss="modal" aria-label="Close" class="btn btn-info" > Fermer </button>
+                </div>
+              </ng-container>
+            </ng-container>
+          </div>
+
+        </div><!-- End .form-box -->
+
+      </div><!-- End .modal-body -->
+    </div><!-- End .modal-content -->
+  </div><!-- End .modal-dialog -->
+</div><!-- End .modal -->

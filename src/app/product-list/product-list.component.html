@@ -1,0 +1,251 @@
+<main class="main">
+  <div class="page-header text-center" style="background-image: url('/assets/images/page-header-bg.jpg')">
+    <div class="container-fluid">
+      <h1 class="page-title">Liste des Produits<span>Shop</span></h1>
+    </div><!-- End .container-fluid -->
+  </div><!-- End .page-header -->
+  <nav aria-label="breadcrumb" class="breadcrumb-nav mb-2">
+    <div class="container-fluid">
+      <ol class="breadcrumb">
+        <li class="breadcrumb-item"><a href="index.html">Home</a></li>
+        <li class="breadcrumb-item"><a href="#">Shop</a></li>
+        <li class="breadcrumb-item active" aria-current="page">Liste des Produits</li>
+      </ol>
+    </div><!-- End .container-fluid -->
+  </nav><!-- End .breadcrumb-nav -->
+
+  <div class="page-content">
+    <div class="container-fluid">
+      <div class="toolbox">
+        <div class="toolbox-left">
+          <!--<a href="#" class="sidebar-toggler"><i class="icon-bars"></i>Filters</a>-->
+        </div><!-- End .toolbox-left -->
+
+        <div class="toolbox-center">
+          <div class="toolbox-info">
+            Total de <span> {{numberOfProducts}} </span> Produits
+          </div><!-- End .toolbox-info -->
+        </div><!-- End .toolbox-center -->
+
+        <div class="toolbox-right">
+          <div *ngIf="isAuthenticated" class="toolbox-sort">
+            <a class="btn btn-success" href="#product-modal"  data-toggle="modal"
+                    (click)="onProductModalOpen()"> Ajouter un Produit </a>
+          </div><!-- End .toolbox-sort -->
+        </div><!-- End .toolbox-right -->
+      </div><!-- End .toolbox -->
+
+      <div class="products">
+        <div class="row">
+          <ng-container *ngIf="(productsList$ | async ) as result" [ngSwitch]="result.dataState" >
+            <ng-container *ngSwitchCase="DataStateEnum.LOADING">
+              Loading .....
+            </ng-container>
+            <ng-container *ngSwitchCase="DataStateEnum.ERROR">
+              <div class="alert-danger">
+                {{result.errorMessage}}
+              </div>
+            </ng-container>
+            <ng-container *ngSwitchCase="DataStateEnum.LOADED">
+
+              <div *ngFor="let product of result.data" class="col-6 col-md-4 col-lg-4 col-xl-3 col-xxl-2">
+                <div class="product">
+                  <figure class="product-media">
+                    <span *ngIf="product.new_product" class="product-label label-new">Nouveauté</span>
+                    <span *ngIf="product.populary" class="product-label label-new">Populaire</span>
+                    <a style="cursor:pointer;" (click)="showOneProduct(product.id)">
+                      <img [src]="'/assets/images/mimipedro/' + product.image" alt="Product image" class="product-image">
+                      <img [src]="'/assets/images/mimipedro/' + product.image2" alt="Product image" class="product-image-hover">
+                    </a>
+
+                    <div *ngIf="isAuthenticated" class="product-action-vertical">
+                      <a href="#product-modal"  data-toggle="modal"
+                         (click)="onProductModalOpen(product)"
+                         class="btn-product-icon icon-info-circle btn-expandable" title="Modifier"><span>Modifier</span></a>
+                    </div><!-- End .product-action -->
+
+                    <div class="product-action action-icon-top">
+                      <a style="cursor:pointer;" (click)="showOneProduct(product.id)" class="btn-product btn-cart"><span>Commander</span></a>
+                    </div><!-- End .product-action -->
+
+                  </figure><!-- End .product-media -->
+
+                  <div class="product-body">
+                    <div class="product-cat">
+                      <a href="#">{{product.category_name}}</a>
+                    </div><!-- End .product-cat -->
+                    <h3 class="product-title"><a href="product.html">{{product.name}}</a></h3><!-- End .product-title -->
+                    <div class="product-price">
+                      {{product.price}} Fcfa
+                    </div><!-- End .product-price -->
+
+                  </div><!-- End .product-body -->
+                </div><!-- End .product -->
+              </div><!-- End .col-sm-6 col-lg-4 col-xl-3 -->
+
+            </ng-container>
+          </ng-container>
+
+        </div><!-- End .row -->
+
+        <!--<div class="load-more-container text-center">
+          <a href="#" class="btn btn-outline-darker btn-load-more">More Products <i class="icon-refresh"></i></a>
+        </div>&lt;!&ndash; End .load-more-container &ndash;&gt;-->
+      </div><!-- End .products -->
+
+    </div><!-- End .container-fluid -->
+  </div><!-- End .page-content -->
+</main><!-- End .main -->
+
+<!-- Product Modal -->
+<div class="modal fade" id="product-modal" tabindex="-1" role="dialog" aria-hidden="true">
+  <div class="modal-dialog modal-dialog-centered" role="document">
+    <div class="modal-content">
+      <div class="modal-header text-center">
+        <h4 class="modal-title">Ajouter/Modifier un produit</h4>
+        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+          <span aria-hidden="true"><i class="icon-close"></i></span>
+        </button>
+      </div>
+      <div class="modal-body">
+        <div class="form-box">
+          <div class="container-fluid">
+            <form *ngIf="!closeModal" style="margin-left: -10%; margin-right: -10%" (submit)="testAndSaveProduct()">
+              <div *ngIf="productFormMode == 'detail'" >
+                <div class="form-row col-md-12">
+                  <div class="col">
+                    <label>Image du Produit :</label>
+                    <img *ngIf=productOnModalImage1 [src]="productOnModalImage1" class="mb-1">
+                    <div class="custom-file">
+                      <input type="file" name="image" class="custom-file-input" (change)="onProductImage2345Upload($event, 1)" >
+                      <label class="custom-file-label">Choose file</label>
+                    </div>
+                  </div>
+                  <div class="col ml-auto">
+                    <div class="form-group">
+                      <label >Nom du Produit :</label>
+                      <input type="text" name="name" class="form-control" [(ngModel)]="productOnModal.name">
+                    </div>
+                    <div class="form-group">
+                      <label>Description:</label>
+                      <textarea type="text" name="description" class="form-control" [(ngModel)]="productOnModal.description"> </textarea>
+                    </div>
+                  </div>
+                </div>
+
+                <div class="form-row">
+                  <div class="form-group col-md-6">
+                    <label>Prix (En Fcfa) :</label>
+                    <input type="number" name="price" class="form-control" [(ngModel)]="productOnModal.price">
+                  </div>
+                  <div class="form-group col-md-6">
+                    <label>Quantité :</label>
+                    <input type="number" name="quantity" class="form-control" [(ngModel)]="productOnModal.quantity">
+                  </div>
+                </div>
+                <div class="form-group">
+                  <label >Categorie :</label>
+                  <select class="form-control custom-select" name="categoryName" [(ngModel)]="productOnModal.category_name">
+                    <option *ngFor = "let category of allCategories" [value]="category.name" >{{category.name}}</option>
+                  </select>
+                </div>
+                <div class="form-group">
+                  <label >Couleurs disponibles</label>
+                  <input type="text" class="form-control" placeholder="Noir ,Blanc, Rouge..." name="colors" [(ngModel)]="productOnModal.colors_availaibles">
+                </div>
+                <div class="form-group">
+                  <label >Tailles disponibles</label>
+                  <input type="text" class="form-control" placeholder="XS ,X, XL..." name="size" [(ngModel)]="productOnModal.sizes_availaibles">
+                </div>
+                <div class="form-row ml-1 mb-2">
+                  <div class="col custom-control custom-checkbox">
+                    <input type="checkbox" class="custom-control-input" id="customCheck1" name="isNew" [(ngModel)]="productOnModal.new_product">
+                    <label class="custom-control-label" for="customCheck1" style="margin-left: 1px">Nouveauté</label>
+                  </div>
+                  <div class="col custom-control custom-checkbox">
+                    <input type="checkbox" class="custom-control-input" id="customCheck2" name="isPopular" [(ngModel)]="productOnModal.populary">
+                    <label class="custom-control-label" for="customCheck2" style="margin-left: 1px">Populaire</label>
+                  </div>
+                </div>
+                <button type="button" data-dismiss="modal" aria-label="Close" class="btn btn-info" > Fermer </button>
+                <button *ngIf="productOnModal.id" (click)="DeleteProduct(productOnModal)" type="button" class="btn btn-danger ml-3"> Supprimer</button>
+                <button type="button" class="btn btn-success ml-3" (click)="productFormMode = 'image'" > Suivant </button>
+              </div> <!-- Fin ProductFormMode = detail -->
+              <div *ngIf="productFormMode == 'image'" >
+
+                <div class="form-row col-md-12 mb-2">
+                  <div class="col">
+                    <label>Image 2 du Produit :</label>
+                    <img *ngIf=productOnModalImage2 [src]="productOnModalImage2" class="mb-1">
+                    <div class="custom-file">
+                      <input type="file" name="image2" class="custom-file-input" (change)="onProductImage2345Upload($event,2)" >
+                      <label class="custom-file-label">Choose file</label>
+                    </div>
+                  </div>
+                  <div class="col">
+                    <label>Image 3 du Produit :</label>
+                    <img *ngIf=productOnModalImage3 [src]="productOnModalImage3" class="mb-1">
+                    <div class="custom-file">
+                      <input type="file" name="image3" class="custom-file-input" (change)="onProductImage2345Upload($event,3)" >
+                      <label class="custom-file-label">Choose file</label>
+                    </div>
+                  </div>
+                </div>
+
+                <div class="form-row col-md-12 mb-2">
+                  <div class="col">
+                    <label>Image 4 du Produit :</label>
+                    <img *ngIf=productOnModalImage4 [src]="productOnModalImage4" class="mb-1">
+                    <div class="custom-file">
+                      <input type="file" name="image4" class="custom-file-input" (change)="onProductImage2345Upload($event,4)" >
+                      <label class="custom-file-label">Choose file</label>
+                    </div>
+                  </div>
+                  <div class="col">
+                    <label>Image 5 du Produit :</label>
+                    <img *ngIf=productOnModalImage5 [src]="productOnModalImage5" class="mb-1">
+                    <div class="custom-file">
+                      <input type="file" name="image5" class="custom-file-input" (change)="onProductImage2345Upload($event,5)" >
+                      <label class="custom-file-label">Choose file</label>
+                    </div>
+                  </div>
+                </div>
+
+                <button type="button" (click)="productFormMode = 'detail'"class="btn btn-info" > Précédant </button>
+                <button type="submit" class="btn btn-success ml-3" > Valider </button>
+              </div>
+            </form>
+            <div *ngIf="closeModal" class="modal-footer">
+              <button (click)="onCloseModal()" type="button" data-dismiss="modal" aria-label="Close" class="btn btn-info" > Fermer </button>
+            </div>
+          </div>
+          <!--<form>
+            <div class="form-group">
+              <input type="file" (change)="onImageUpload($event)">
+              <input type="button" (click)="imageUploadAction()" value="Upload Image" class="btn1">
+            </div>
+
+
+            <div>
+              <output *ngIf=successResponse class="success"><b>{{successResponse}}</b></output>
+            </div>
+            <br>
+
+            <div class="form-group">
+              <input type="text" id="image" placeholder="Search Image" [(ngModel)]="image" name="image" />
+              <input type="button" (click)="viewImage()" value="View Image" class="btn1">
+
+            </div>
+
+            <div *ngIf=dbImage>
+              <img [src]="dbImage">
+            </div>
+
+          </form>-->
+
+        </div><!-- End .form-box -->
+
+      </div><!-- End .modal-body -->
+    </div><!-- End .modal-content -->
+  </div><!-- End .modal-dialog -->
+</div><!-- End .modal -->

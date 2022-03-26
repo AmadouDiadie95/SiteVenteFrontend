@@ -1,0 +1,158 @@
+<main class="main">
+  <div class="page-header text-center" style="background-image: url('assets/images/page-header-bg.jpg')">
+    <div class="container-fluid">
+      <h1 class="page-title">Liste des Commandes<span>Shop</span></h1>
+    </div><!-- End .container-fluid -->
+  </div><!-- End .page-header -->
+  <nav aria-label="breadcrumb" class="breadcrumb-nav breadcrumb-with-filter">
+    <div class="container-fluid">
+      <!--<a href="#" class="sidebar-toggler"><i class="icon-bars"></i>Filters</a>-->
+      <ol class="breadcrumb">
+        <li class="breadcrumb-item"><a href="index.html">Home</a></li>
+        <li class="breadcrumb-item"><a href="#">Shop</a></li>
+        <li class="breadcrumb-item"><a href="#">Liste des Commandes</a></li>
+      </ol>
+    </div><!-- End .container-fluid -->
+  </nav><!-- End .breadcrumb-nav -->
+
+  <div class="page-content">
+    <div class="categories-page">
+      <div class="container-fluid">
+        <table class="table table-striped" id="myTable">
+          <thead>
+          <tr>
+            <th style="cursor:pointer;" (click)="sortTable(0)" scope="col">Date</th>
+            <th style="cursor:pointer;" (click)="sortTable(1)" scope="col">Produit</th>
+            <th style="cursor:pointer;" (click)="sortTable(2)" scope="col">Nom du Client</th>
+            <th style="cursor:pointer;" (click)="sortTable(3)" scope="col">Contact du Client</th>
+            <th style="cursor:pointer;" (click)="sortTable(4)" scope="col">Etat de la Commande</th>
+            <th scope="col">Action</th>
+          </tr>
+          </thead>
+          <tbody>
+          <tr *ngFor="let command of allCommandes">
+            <td>{{command.commande_date | date : 'yyyy/MM/dd'}}</td>
+            <td>{{command.product_name}}</td>
+            <td>{{command.client_name}} {{command.client_prenom}}</td>
+            <td>{{command.client_tel}}</td>
+            <td *ngIf="!command.done">Non-Effectuée</td>
+            <td *ngIf="command.done">Effectuée </td>
+            <td>
+              <a href="#command-modal" data-toggle="modal" (click)="onCommandModalOpen(command)" class="btn btn-info">Details</a>
+            </td>
+          </tr>
+
+          </tbody>
+        </table>
+      </div><!-- End .container -->
+    </div><!-- End .categories-page -->
+  </div><!-- End .page-content -->
+</main><!-- End .main -->
+
+<!-- Command Modal -->
+<div class="modal fade" id="command-modal" tabindex="-1" role="dialog" aria-hidden="true">
+  <div class="modal-dialog modal-dialog-centered" role="document">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h4 class="modal-title text-center">Detail d'une Commande</h4>
+        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+          <span aria-hidden="true"><i class="icon-close"></i></span>
+        </button>
+      </div>
+      <div class="modal-body">
+        <div class="form-box">
+          <div class="container-fluid">
+            <div *ngIf="!closeModal">
+              <div class="form-row">
+                <div class="col form-group">
+                  <label>Nom : </label>
+                  <strong> {{commandOnModal.client_name}}</strong>
+                </div>
+                <div class="col ml-auto form-group">
+                  <label>Prenom :</label>
+                  <strong> {{commandOnModal.client_prenom}}</strong>
+                </div>
+              </div>
+
+              <div class="form-group">
+                <label>Adresse : </label>
+                <strong> {{commandOnModal.client_adresse}}</strong>
+              </div>
+              <div class="form-group">
+                <label>Email : </label>
+                <strong> {{commandOnModal.client_email}}</strong>
+              </div>
+              <div class="form-group">
+                <label>Numero de Telephone : </label>
+                <strong> {{commandOnModal.client_tel}}</strong>
+              </div>
+              <div class="form-row">
+                <div class="col form-group">
+                  <label>Couleur Souhaitée :</label>
+                  <strong> {{commandOnModal.color_choiced}}</strong>
+                </div>
+                <div class="col ml-auto form-group">
+                  <label>Taille Souhaitée :</label>
+                  <strong> {{commandOnModal.size_choiced}}</strong>
+                </div>
+              </div>
+              <div class="form-group">
+                <label>Quantité choisie : </label>
+                <strong> {{commandOnModal.quantity_choiced}}</strong>
+              </div>
+              <div class="form-row">
+                <div class="col form-group">
+                  <label>Prix Unitaire :</label>
+                  <strong> {{commandOnModal.product_price}} Fcfa</strong>
+                </div>
+                <div class="col ml-auto form-group">
+                  <label>Prix Total :</label>
+                  <strong> {{commandOnModal.total_price}} Fcfa</strong>
+                </div>
+              </div>
+              <div class="form-group">
+                <label>Remarque : </label>
+                <strong> {{commandOnModal.particularity}}</strong>
+              </div>
+            </div>
+            <div class="modal-footer">
+              <button *ngIf="commandOnModal.done || closeModal == true" type="button" data-dismiss="modal" aria-label="Close" class="btn btn-info" > Fermer </button>
+              <div *ngIf="!closeModal">
+                <button (click)="DeleteCommand()" type="button" class="btn btn-danger"> Supprimer</button>
+                <button *ngIf="!commandOnModal.done" (click)="DoneCommand()" type="button" class="btn btn-success">
+                  Declaré comme Effectuée
+                </button>
+              </div>
+            </div>
+          </div>
+
+          <!--<form>
+            <div class="form-group">
+              <input type="file" (change)="onImageUpload($event)">
+              <input type="button" (click)="imageUploadAction()" value="Upload Image" class="btn1">
+            </div>
+
+
+            <div>
+              <output *ngIf=successResponse class="success"><b>{{successResponse}}</b></output>
+            </div>
+            <br>
+
+            <div class="form-group">
+              <input type="text" id="image" placeholder="Search Image" [(ngModel)]="image" name="image" />
+              <input type="button" (click)="viewImage()" value="View Image" class="btn1">
+
+            </div>
+
+            <div *ngIf=dbImage>
+              <img [src]="dbImage">
+            </div>
+
+          </form>-->
+
+        </div><!-- End .form-box -->
+
+      </div><!-- End .modal-body -->
+    </div><!-- End .modal-content -->
+  </div><!-- End .modal-dialog -->
+</div><!-- End .modal -->

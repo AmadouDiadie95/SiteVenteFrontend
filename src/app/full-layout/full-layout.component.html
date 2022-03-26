@@ -1,0 +1,419 @@
+<!DOCTYPE html>
+<html lang="en">
+
+
+<!-- molla/category-fullwidth.html  22 Nov 2019 10:03:02 GMT -->
+<head>
+  <meta charset="UTF-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+  <title>Atelier de Couture MimiPedro</title>
+  <meta name="keywords" content="HTML5 Template">
+  <meta name="description" content="Atelier de Couture">
+  <meta name="author" content="p-themes">
+  <!-- Favicon -->
+  <link rel="apple-touch-icon" sizes="180x180" href="/assets/images/icons/apple-touch-icon.png">
+  <link rel="icon" type="image/png" sizes="32x32" href="/assets/images/icons/favicon-32x32.png">
+  <link rel="icon" type="image/png" sizes="16x16" href="/assets/images/icons/favicon-16x16.png">
+  <link rel="manifest" href="/assets/images/icons/site.html">
+  <link rel="mask-icon" href="/assets/images/icons/safari-pinned-tab.svg" color="#666666">
+  <link rel="shortcut icon" href="/assets/images/icons/favicon.ico">
+  <meta name="apple-mobile-web-app-title" content="Molla">
+  <meta name="application-name" content="Molla">
+  <meta name="msapplication-TileColor" content="#cc9966">
+  <meta name="msapplication-config" content="/assets/images/icons/browserconfig.xml">
+  <meta name="theme-color" content="#ffffff">
+<!--  &lt;!&ndash; Plugins CSS File &ndash;&gt;
+  <link rel="stylesheet" href="/assets/css/bootstrap.min.css">
+  &lt;!&ndash; Main CSS File &ndash;&gt;
+  <link rel="stylesheet" href="/assets/css/style.css">
+  <link rel="stylesheet" href="/assets/css/plugins/owl-carousel/owl.carousel.css">
+  <link rel="stylesheet" href="/assets/css/plugins/magnific-popup/magnific-popup.css">
+  <link rel="stylesheet" href="/assets/css/plugins/nouislider/nouislider.css">-->
+</head>
+
+<body>
+<div class="page-wrapper">
+  <header class="header">
+    <div class="header-top mt-1">
+      <div class="container-fluid">
+
+        <div class="header-right">
+          <ul class="top-menu">
+            <li>
+              <a href="#">Links</a>
+              <ul>
+                <li><a href="tel:+223 76 49 82 56"><i class="icon-phone"></i>+223 76 49 82 56</a></li>
+                <!--<li><a href="wishlist.html"><i class="icon-heart-o"></i>Wishlist <span>(3)</span></a></li>-->
+                <li><a href="shop/about">About</a></li>
+                <li><a href="shop/contact">Contact</a></li>
+                <li *ngIf="!isAuthenticated"><a href="#signin-modal" data-toggle="modal"><i class="icon-user"></i>Login</a></li>
+                <li *ngIf="isAuthenticated"><a style="cursor:pointer;" (click)="Logout()"><i class="icon-user"></i>Logout</a></li>
+              </ul>
+            </li>
+          </ul><!-- End .top-menu -->
+        </div><!-- End .header-right -->
+      </div><!-- End .container-fluid -->
+    </div><!-- End .header-top -->
+
+    <div class="header-middle sticky-header">
+      <div class="container-fluid">
+        <div class="header-left">
+          <button class="mobile-menu-toggler">
+            <span class="sr-only">Toggle mobile menu</span>
+            <i class="icon-bars"></i>
+          </button>
+
+          <a href="home" class="logo">
+            <img src="/assets/images/mimiPedro.jpeg" alt="Molla Logo" width="105" height="25">
+          </a>
+
+          <nav class="main-nav">
+            <ul class="menu sf-arrows">
+              <li class="megamenu-container">
+                <a href="home">Home</a>
+              </li>
+              <li>
+                <a style="cursor: pointer" (click)="redirectOnProductList()" class="sf-with-ul">Produits</a>
+
+                <div class="megamenu megamenu-sm">
+                  <div class="row no-gutters">
+                    <div class="col-md-6">
+                      <div class="menu-col">
+                        <div class="menu-title">Categories</div><!-- End .menu-title -->
+                        <ul>
+                          <li style="cursor: pointer" *ngFor="let category of allCategories"><a (click)="redirectOnProductList('ByCategoryName','category_name', category.name)">{{category.name}}</a></li>
+                        </ul>
+                      </div><!-- End .menu-col -->
+                    </div><!-- End .col-md-6 -->
+
+                    <div class="col-md-6">
+                      <div class="banner banner-overlay">
+                        <a href="shop/product-list">
+                          <img src="/assets/images/menu/banner-2.jpg" alt="Banner">
+
+                          <div class="banner-content banner-content-bottom">
+                            <div class="banner-title text-white">Bienvenue chez <br><span><strong>MimiPedro</strong></span></div><!-- End .banner-title -->
+                          </div><!-- End .banner-content -->
+                        </a>
+                      </div><!-- End .banner -->
+                    </div><!-- End .col-md-6 -->
+                  </div><!-- End .row -->
+                </div><!-- End .megamenu megamenu-sm -->
+              </li>
+              <li>
+                <a href="shop/category-list">Categories</a>
+              </li>
+              <li>
+                <a href="shop/about">About</a>
+              </li>
+              <li>
+                <a href="shop/contact">Contact</a>
+              </li>
+            </ul><!-- End .menu -->
+          </nav><!-- End .main-nav -->
+        </div><!-- End .header-left -->
+
+        <div class="header-right">
+          <div class="header-search">
+            <a href="#" class="search-toggle" role="button" title="Search"><i class="icon-search"></i></a>
+            <form (submit)="redirectOnProductList('ByNameContains', 'name', productSearchKey)">
+              <div class="header-search-wrapper">
+                <label for="q" class="sr-only">Search</label>
+                <input type="search" class="form-control" name="q" id="q" placeholder="Rechercher un produit ..." [(ngModel)]="productSearchKey" required>
+                <button class="btn btn-primary" type="submit"><i class="icon-search"></i></button>
+              </div><!-- End .header-search-wrapper -->
+            </form>
+          </div><!-- End .header-search -->
+        </div><!-- End .header-right -->
+      </div><!-- End .container-fluid -->
+    </div><!-- End .header-middle -->
+  </header><!-- End .header -->
+
+
+  <!----------------------------------------------------------------------------------------------------------->
+  <!----------------------------------------------------------------------------------------------------------->
+
+  <router-outlet></router-outlet>
+
+  <!----------------------------------------------------------------------------------------------------------->
+  <!----------------------------------------------------------------------------------------------------------->
+
+
+
+
+
+  <footer class="footer footer-2">
+    <!--<div class="footer-middle border-0">
+      <div class="container">
+        <div class="row">
+          <div class="col-sm-12 col-lg-6">
+            <div class="widget widget-about">
+              <img src="/assets/images/demos/demo-5/logo-footer.png" class="footer-logo" alt="Footer Logo" width="105" height="25">
+              <p></p>
+
+              <div class="widget-about-info">
+                <div class="row">
+                  <div class="col-sm-12 col-md-12">
+                    <span class="widget-about-title">Djelibougou, Près du Lycée Kodonso</span>
+                    <a href="tel:123456789">+223 77 77 77 77</a>
+                  </div>&lt;!&ndash; End .col-sm-6 &ndash;&gt;
+&lt;!&ndash;                  <div class="col-sm-6 col-md-8">
+                    <span class="widget-about-title">Payment Method</span>
+                    <figure class="footer-payments">
+                      <img src="/assets/images/payments.png" alt="Payment methods" width="272" height="20">
+                    </figure>&lt;!&ndash; End .footer-payments &ndash;&gt;
+                  </div>&lt;!&ndash; End .col-sm-6 &ndash;&gt;&ndash;&gt;
+                </div>&lt;!&ndash; End .row &ndash;&gt;
+              </div>&lt;!&ndash; End .widget-about-info &ndash;&gt;
+            </div>&lt;!&ndash; End .widget about-widget &ndash;&gt;
+          </div>&lt;!&ndash; End .col-sm-12 col-lg-3 &ndash;&gt;
+
+          <div class="col-sm-4 col-lg-2">
+            <div class="widget">
+              <h4 class="widget-title">Information</h4>&lt;!&ndash; End .widget-title &ndash;&gt;
+
+              &lt;!&ndash;<ul class="widget-list">
+                <li><a href="about.html">About Molla</a></li>
+                <li><a href="#">How to shop on Molla</a></li>
+                <li><a href="faq.html">FAQ</a></li>
+                <li><a href="contact.html">Contact us</a></li>
+                <li><a href="login.html">Log in</a></li>
+              </ul>&lt;!&ndash; End .widget-list &ndash;&gt;&ndash;&gt;
+            </div>&lt;!&ndash; End .widget &ndash;&gt;
+          </div>&lt;!&ndash; End .col-sm-4 col-lg-3 &ndash;&gt;
+
+          <div class="col-sm-4 col-lg-2">
+            <div class="widget">
+              <h4 class="widget-title">Customer Service</h4>&lt;!&ndash; End .widget-title &ndash;&gt;
+
+              &lt;!&ndash;<ul class="widget-list">
+                <li><a href="#">Payment Methods</a></li>
+                <li><a href="#">Money-back guarantee!</a></li>
+                <li><a href="#">Returns</a></li>
+                <li><a href="#">Shipping</a></li>
+                <li><a href="#">Terms and conditions</a></li>
+                <li><a href="#">Privacy Policy</a></li>
+              </ul>&lt;!&ndash; End .widget-list &ndash;&gt;&ndash;&gt;
+            </div>&lt;!&ndash; End .widget &ndash;&gt;
+          </div>&lt;!&ndash; End .col-sm-4 col-lg-3 &ndash;&gt;
+
+          <div class="col-sm-4 col-lg-2">
+            <div class="widget">
+              <h4 class="widget-title">My Account</h4>&lt;!&ndash; End .widget-title &ndash;&gt;
+
+              &lt;!&ndash;<ul class="widget-list">
+                <li><a href="#">Sign In</a></li>
+                <li><a href="cart.html">View Cart</a></li>
+                <li><a href="#">My Wishlist</a></li>
+                <li><a href="#">Track My Order</a></li>
+                <li><a href="#">Help</a></li>
+              </ul>&lt;!&ndash; End .widget-list &ndash;&gt;&ndash;&gt;
+            </div>&lt;!&ndash; End .widget &ndash;&gt;
+          </div>&lt;!&ndash; End .col-sm-64 col-lg-3 &ndash;&gt;
+        </div>&lt;!&ndash; End .row &ndash;&gt;
+      </div>&lt;!&ndash; End .container &ndash;&gt;
+    </div>&lt;!&ndash; End .footer-middle &ndash;&gt;-->
+
+    <div class="footer-bottom">
+      <div class="container">
+        <p class="footer-copyright">Developped By Amadou.diadie04@gmail.com</p><!-- End .footer-copyright -->
+        <!--<ul class="footer-menu">
+          <li><a href="#">Terms Of Use</a></li>
+          <li><a href="#">Privacy Policy</a></li>
+        </ul>&lt;!&ndash; End .footer-menu &ndash;&gt;-->
+        <div class="social-icons social-icons-color">
+          <span class="social-label">Badalabougou Rue 36 - Porte 62 / <a href="tel:+223 76 49 82 56">+223 76 49 82 56</a> </span>
+          <a href="https://www.facebook.com/mimipedro.kouyate" class="social-icon social-facebook" title="Facebook" target="_blank"><i class="icon-facebook-f"></i></a>
+          <a href="https://wa.me/22376498256" class="social-icon social-whatsapp" title="Whatsapp" target="_blank"><i class="icon-whatsapp"></i></a>
+          <!--          <a href="#" class="social-icon social-twitter" title="Twitter" target="_blank"><i class="icon-twitter"></i></a>
+                    <a href="#" class="social-icon social-instagram" title="Instagram" target="_blank"><i class="icon-instagram"></i></a>
+                    <a href="#" class="social-icon social-youtube" title="Youtube" target="_blank"><i class="icon-youtube"></i></a>
+                    <a href="#" class="social-icon social-pinterest" title="Pinterest" target="_blank"><i class="icon-pinterest"></i></a>-->
+        </div><!-- End .soial-icons -->
+      </div><!-- End .container -->
+    </div><!-- End .footer-bottom -->
+  </footer><!-- End .footer -->
+</div><!-- End .page-wrapper -->
+<button id="scroll-top" title="Back to Top"><i class="icon-arrow-up"></i></button>
+
+<!-- Mobile Menu -->
+<div class="mobile-menu-overlay"></div><!-- End .mobil-menu-overlay -->
+
+<div class="mobile-menu-container mobile-menu-light">
+  <div class="mobile-menu-wrapper">
+    <span class="mobile-menu-close"><i class="icon-close"></i></span>
+
+    <form (submit)="redirectOnProductList('ByNameContains', 'name', productSearchKey)" class="mobile-search">
+      <label for="mobile-search" class="sr-only">Search</label>
+      <input type="search" class="form-control" name="mobile-search" id="mobile-search" placeholder="Rechercher un produit ..." [(ngModel)]="productSearchKey" required>
+      <button class="btn btn-primary" type="submit"><i class="icon-search"></i></button>
+    </form>
+
+    <nav class="mobile-nav">
+      <ul class="mobile-menu">
+        <li class="active">
+          <a href="home">Home</a>
+        </li>
+        <li>
+          <a href="shop/product-list">Produits</a>
+        </li>
+        <li>
+          <a href="shop/category-list">Categories</a>
+        </li>
+        <li>
+          <a href="shop/about">About</a>
+        </li>
+        <li>
+          <a href="shop/contact">Contact</a>
+        </li>
+      </ul>
+    </nav><!-- End .mobile-nav -->
+
+    <div class="social-icons">
+      <a href="https://www.facebook.com/mimipedro.kouyate" class="social-icon" target="_blank" title="Facebook"><i class="icon-facebook-f"></i></a>
+      <a href="https://wa.me/22376498256" class="social-icon social-whatsapp" title="Whatsapp" target="_blank"><i class="icon-whatsapp"></i></a>
+      <!--      <a href="#" class="social-icon" target="_blank" title="Instagram"><i class="icon-instagram"></i></a>
+            <a href="#" class="social-icon" target="_blank" title="Youtube"><i class="icon-youtube"></i></a>-->
+    </div><!-- End .social-icons -->
+  </div><!-- End .mobile-menu-wrapper -->
+</div><!-- End .mobile-menu-container -->
+
+<!-- Sign in / Register Modal -->
+<div class="modal fade" id="signin-modal" tabindex="-1" role="dialog" aria-hidden="true">
+  <div class="modal-dialog modal-dialog-centered" role="document">
+    <div class="modal-content">
+      <div class="modal-body">
+        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+          <span aria-hidden="true"><i class="icon-close"></i></span>
+        </button>
+
+        <div class="form-box">
+          <div class="form-tab">
+            <ul class="nav nav-pills nav-fill" role="tablist">
+              <li class="nav-item">
+                <a class="nav-link active" id="signin-tab" data-toggle="tab" href="#signin" role="tab" aria-controls="signin" aria-selected="true">Sign In</a>
+              </li>
+              <!--<li class="nav-item">
+                <a class="nav-link" id="register-tab" data-toggle="tab" href="#register" role="tab" aria-controls="register" aria-selected="false">Register</a>
+              </li>-->
+            </ul>
+            <div class="tab-content" id="tab-content-5">
+              <div class="tab-pane fade show active" id="signin" role="tabpanel" aria-labelledby="signin-tab">
+                <form *ngIf="!closeModal" (submit)="Login()">
+                  <div class="form-group">
+                    <label>Username *</label>
+                    <input type="text" class="form-control" name="singin-email" [(ngModel)]="username">
+                  </div><!-- End .form-group -->
+
+                  <div class="form-group">
+                    <label>Password *</label>
+                    <input type="password" class="form-control" name="singin-password" [(ngModel)]="password">
+                  </div><!-- End .form-group -->
+
+                  <div class="form-footer">
+                    <button type="submit" class="btn btn-outline-primary-2">
+                      <span>LOG IN</span>
+                      <i class="icon-long-arrow-right"></i>
+                    </button>
+
+                    <!--<div class="custom-control custom-checkbox">
+                      <input type="checkbox" class="custom-control-input" id="signin-remember">
+                      <label class="custom-control-label" for="signin-remember">Remember Me</label>
+                    </div>&lt;!&ndash; End .custom-checkbox &ndash;&gt;
+
+                    <a href="#" class="forgot-link">Forgot Your Password?</a>-->
+                  </div><!-- End .form-footer -->
+                </form>
+                <div *ngIf="closeModal" class="form-footer">
+                  <button (click)="onCloseModal()" type="button" data-dismiss="modal" aria-label="Close" class="btn btn-outline-info">
+                    <span>FERMER</span>
+                    <i class="icon-long-arrow-right"></i>
+                  </button>
+                </div><!-- End .form-footer -->
+                <!--<div class="form-choice">
+                  <p class="text-center">or sign in with</p>
+                  <div class="row">
+                    <div class="col-sm-6">
+                      <a href="#" class="btn btn-login btn-g">
+                        <i class="icon-google"></i>
+                        Login With Google
+                      </a>
+                    </div>&lt;!&ndash; End .col-6 &ndash;&gt;
+                    <div class="col-sm-6">
+                      <a href="#" class="btn btn-login btn-f">
+                        <i class="icon-facebook-f"></i>
+                        Login With Facebook
+                      </a>
+                    </div>&lt;!&ndash; End .col-6 &ndash;&gt;
+                  </div>&lt;!&ndash; End .row &ndash;&gt;
+                </div>&lt;!&ndash; End .form-choice &ndash;&gt;-->
+              </div><!-- .End .tab-pane -->
+              <!--<div class="tab-pane fade" id="register" role="tabpanel" aria-labelledby="register-tab">
+                <form action="#">
+                  <div class="form-group">
+                    <label for="register-email">Your email address *</label>
+                    <input type="email" class="form-control" id="register-email" name="register-email" required>
+                  </div>&lt;!&ndash; End .form-group &ndash;&gt;
+
+                  <div class="form-group">
+                    <label for="register-password">Password *</label>
+                    <input type="password" class="form-control" id="register-password" name="register-password" required>
+                  </div>&lt;!&ndash; End .form-group &ndash;&gt;
+
+                  <div class="form-footer">
+                    <button type="submit" class="btn btn-outline-primary-2">
+                      <span>SIGN UP</span>
+                      <i class="icon-long-arrow-right"></i>
+                    </button>
+
+                    <div class="custom-control custom-checkbox">
+                      <input type="checkbox" class="custom-control-input" id="register-policy" required>
+                      <label class="custom-control-label" for="register-policy">I agree to the <a href="#">privacy policy</a> *</label>
+                    </div>&lt;!&ndash; End .custom-checkbox &ndash;&gt;
+                  </div>&lt;!&ndash; End .form-footer &ndash;&gt;
+                </form>
+                <div class="form-choice">
+                  <p class="text-center">or sign in with</p>
+                  <div class="row">
+                    <div class="col-sm-6">
+                      <a href="#" class="btn btn-login btn-g">
+                        <i class="icon-google"></i>
+                        Login With Google
+                      </a>
+                    </div>&lt;!&ndash; End .col-6 &ndash;&gt;
+                    <div class="col-sm-6">
+                      <a href="#" class="btn btn-login  btn-f">
+                        <i class="icon-facebook-f"></i>
+                        Login With Facebook
+                      </a>
+                    </div>&lt;!&ndash; End .col-6 &ndash;&gt;
+                  </div>&lt;!&ndash; End .row &ndash;&gt;
+                </div>&lt;!&ndash; End .form-choice &ndash;&gt;
+              </div>&lt;!&ndash; .End .tab-pane &ndash;&gt;-->
+            </div><!-- End .tab-content -->
+          </div><!-- End .form-tab -->
+        </div><!-- End .form-box -->
+      </div><!-- End .modal-body -->
+    </div><!-- End .modal-content -->
+  </div><!-- End .modal-dialog -->
+</div><!-- End .modal -->
+
+<!-- Plugins JS File
+<script src="/assets/js/jquery.min.js"></script>
+<script src="/assets/js/bootstrap.bundle.min.js"></script>
+<script src="/assets/js/jquery.hoverIntent.min.js"></script>
+<script src="/assets/js/jquery.waypoints.min.js"></script>
+<script src="/assets/js/superfish.min.js"></script>
+<script src="/assets/js/owl.carousel.min.js"></script>
+<script src="/assets/js/wNumb.js"></script>
+<script src="/assets/js/bootstrap-input-spinner.js"></script>
+<script src="/assets/js/jquery.magnific-popup.min.js"></script>
+<script src="/assets/js/nouislider.min.js"></script>
+&lt;!&ndash; Main JS File &ndash;&gt;
+<script src="/assets/js/main.js"></script>-->
+</body>
+
+
+<!-- molla/category-fullwidth.html  22 Nov 2019 10:03:02 GMT -->
+</html>
