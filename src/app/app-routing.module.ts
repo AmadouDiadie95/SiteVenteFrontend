@@ -9,14 +9,12 @@ import {AboutComponent} from "./about/about.component";
 import {ContactComponent} from "./contact/contact.component";
 import {Error404Component} from "./error404/error404.component";
 import {CommandListComponent} from "./command-list/command-list.component";
-import {TestDayGuard} from "./guards/test-day.guard";
 
 const routes: Routes = [
   { path: '', redirectTo:'/home', pathMatch: 'full'},
   { path: 'home', component: HomeComponent },
   { path: 'shop',
     component: FullLayoutComponent,
-    canActivate: [TestDayGuard],
     children:[
       { path: 'product-list', component: ProductListComponent},
       { path: 'category-list', component: CategoryListComponent},

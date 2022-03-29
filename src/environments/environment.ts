@@ -4,7 +4,7 @@
 
 export const environment = {
   production: false,
-  urlBackend: 'http://mimipedro.com/'
+  urlBackend: 'https://www.mimipredo.com/laravel-rest/public/api/'
 };
 
 /*
