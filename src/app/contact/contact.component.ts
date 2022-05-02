@@ -123,4 +123,9 @@ export class ContactComponent implements OnInit {
       console.log(error);
     });
   }
+
+  sendForm() {
+    alert('Message envoyé avec Suceeès, Merci de votre Confiance !') ;
+    this.router.navigateByUrl('/home') ;
+  }
 }

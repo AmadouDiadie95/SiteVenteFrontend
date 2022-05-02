@@ -1,7 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import {CategoryModel} from "../models/category.model";
 import {RestApiService} from "../services/rest-api.service";
-import {HttpClient} from "@angular/common/http";
 import {Router} from "@angular/router";
 import {NgbModal} from "@ng-bootstrap/ng-bootstrap";
 import {ToastrService} from "ngx-toastr";
@@ -21,6 +20,7 @@ export class CategoryListComponent implements OnInit {
   isAuthenticated = localStorage.getItem('authenticated');
   fileToSend: any;
   categoryModalImage: string | ArrayBuffer | null;
+  updateCategory: boolean = false ;
 
   constructor(private restApiService: RestApiService,
               private router: Router,private modalService: NgbModal,
@@ -43,8 +43,9 @@ export class CategoryListComponent implements OnInit {
         }
       } // Fin While
     }, error => {
-      this.toastrService.error('Erreur lors du chargement des Categories, Veuillez Rechargez la page !') ;
-      console.log(error) ;
+      // console.log(error) ;
+      this.toastrService.error('Erreur lors du chargement de la page, Veuillez Rechargez !');
+      console.log(error);
     }) ;
   }
 
@@ -81,7 +82,7 @@ export class CategoryListComponent implements OnInit {
     if ( this.categoryToUpdate.name == null || this.categoryToUpdate.name == '' || this.categoryToUpdate.name == ' ' ) {
       this.toastrService.error('Veuillez indiquer le Nom de la Categorie !')
     } else  if ( this.fileToSend == null ) {
-      this.toastrService.error('Veuillez chosiir une Image pour la Categorie !')
+      this.saveCategory();
     } else {
       this.categoryToUpdate.image = this.fileToSend.item(0).name ;
       const file: File | null = this.fileToSend.item(0) ;
@@ -93,7 +94,7 @@ export class CategoryListComponent implements OnInit {
             cpt++
           }
         }, error => {
-          this.toastrService.error("Erreur lors de la Sauvegarde dans la Base de Données, Veuillez Ressayez !")
+          this.toastrService.warning("Le chargement de l'image peut prendre un certain Temps, Veuillez Recharger si l'image n'apparaît pas !!")
           console.log(error) ;
         });
       }
@@ -101,24 +102,39 @@ export class CategoryListComponent implements OnInit {
   }
 
   private saveCategory() {
-    this.restApiService.put('categories', this.categoryToUpdate.id, this.categoryToUpdate).subscribe(data => {
-      this.toastrService.success('Success') ;
-      this.closeModal = true ;
-      this.categoryToUpdate = new CategoryModel() ;
-      this.fileToSend = null ;
-      this.categoryModalImage = null ;
-    }, error => {
-      // this.toastrService.error('Erreur lors de la Sauvegarde dans la Base de donnée, Veuillez Ressayer !') ;
-      console.log(error) ;
-    }) ;
+    if (this.updateCategory) {
+      this.restApiService.put('categories', this.categoryToUpdate.id, this.categoryToUpdate).subscribe(data => {
+        this.toastrService.success('Success');
+        this.closeModal = true;
+        this.categoryToUpdate = new CategoryModel();
+        this.fileToSend = null;
+        this.categoryModalImage = null;
+      }, error => {
+        // this.toastrService.error('Erreur lors de la Sauvegarde dans la Base de donnée, Veuillez Ressayer !') ;
+        console.log(error);
+      });
+    } else {
+      this.restApiService.save('categories', this.categoryToUpdate).subscribe(data => {
+        this.toastrService.success('Success');
+        this.closeModal = true;
+        this.categoryToUpdate = new CategoryModel();
+        this.fileToSend = null;
+        this.categoryModalImage = null;
+      }, error => {
+        // this.toastrService.error('Erreur lors de la Sauvegarde dans la Base de donnée, Veuillez Ressayer !') ;
+        console.log(error);
+      });
+    }
   }
 
   onCategoryModalOpen(category?: CategoryModel) {
-      this.closeModal = false;
+    this.closeModal = false;
     if (category) {
+      this.updateCategory = true ;
       this.categoryToUpdate = category;
       this.categoryModalImage = 'assets/images/mimipedro/' + category.image ;
     } else {
+      this.updateCategory = false ;
       this.categoryToUpdate = new CategoryModel() ;
     }
   }
